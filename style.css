@@ -1,0 +1,137 @@
+.video_head{
+    background-color: #3C4AED;
+    flex-wrap: wrap;
+}.logo{
+    padding-left: 25px;
+    padding-top: 25px;
+    margin-left: 20%;
+    flex-wrap: wrap;
+}
+.header_text{
+    font-size: 45px;
+    color: aliceblue;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    justify-content: center;
+    padding-left: 50px;
+    padding-right: 50px;
+    margin-top: 50px;
+    flex-wrap: wrap;
+}
+.navbar{
+    position: relative;
+    float: right;
+    margin-right: 25px;
+    display: flex;
+    color: antiquewhite;
+    flex-wrap: wrap;
+    
+}
+
+.navbar ul li{
+    text-decoration: none;
+    color: antiquewhites;
+    flex-wrap: wrap;
+}
+a{
+    color: antiquewhite;
+    text-decoration: none;
+    flex-wrap: wrap;
+}
+li{
+    text-decoration: none;
+    display: inline;
+    float: right;
+    margin-right: 50px;
+    font-size: 25px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+.video{
+    margin: 0px;
+    flex-wrap: wrap;
+}
+.para1{
+    justify-content: center;
+    margin-left: 40px;
+    margin-right: 50px;
+    margin-top: 100px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 25px;
+    display: block;
+    flex-wrap: wrap;
+}
+.para2{
+    opacity: 50%;
+    flex-wrap: wrap;
+}
+.mainbody{
+    margin: 0%;
+    flex-wrap: wrap;
+    background-color:aliceblue ;
+}
+.cntbutton{
+    padding: 16px 25px;
+    border: 1px none #096ad0;
+    border-radius: 40px;
+    background-color: #fff;
+    box-shadow: 0 4px 11px 0 rgba(146, 96, 0, 0.35);
+    -webkit-transition: all 200ms ease;
+    transition: all 200ms ease;
+    font-family: Montserrat, sans-serif;
+    font-size: 11px;
+    flex-wrap: wrap;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #3C4AED;
+}
+.block{
+    width: 1200px;
+    height: 500px;
+    margin: auto;
+    display: flex;
+    padding-top: 50px;
+}
+.left{
+    width: 600px;
+    height: 500px;
+}.right{
+    width: 600px;
+    height: 500px;
+}
+.heading{
+    font-size: 25px;
+    font-family: Montserrat, sans-serif;
+    text-decoration: solid;
+}
+.txt{
+    opacity: 50%;
+    font-size: 20px;
+    font-family: Montserrat, sans-serif;
+}
+.readmore{
+    color: #096ad0;
+    flex-wrap: wrap;
+    text-decoration: underline;
+    font-size: 15px;
+}
+.block3{
+    width: 1800px;
+    height: 1080px;
+    background-color: #096ad0;
+    margin: auto;
+}
+.block3_1{
+    width: 1700px;
+    height: 1080px;
+    display: flex;
+    margin:auto;
+}
+.wrapper{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+.g2{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
