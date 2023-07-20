@@ -10,12 +10,13 @@
 .header_text{
     font-size: 45px;
     color: aliceblue;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    justify-content: center;
-    padding-left: 50px;
-    padding-right: 50px;
-    margin-top: 50px;
-    flex-wrap: wrap;
+    justify-content:center;
+    font-family: Montserrat, sans-serif;
+    max-width: 70rem;
+    text-align: center;
+    align-items: center;
+    margin: auto;
+    padding-top: 3rem;
 }
 .navbar{
     position: relative;
@@ -47,11 +48,15 @@ li{
     flex-wrap: wrap;
 }
 .video{
-    margin: 0px;
     flex-wrap: wrap;
+    padding-bottom: 2rem;
+    text-align: center;
+    padding-bottom: 8rem;
+    
 }
 .para1{
     justify-content: center;
+    text-align: center;
     margin-left: 40px;
     margin-right: 50px;
     margin-top: 100px;
@@ -62,12 +67,15 @@ li{
 }
 .para2{
     opacity: 50%;
+    text-align: center;
     flex-wrap: wrap;
 }
 .mainbody{
     margin: 0%;
     flex-wrap: wrap;
     background-color:aliceblue ;
+
+    font-family: Montserrat, sans-serif;
 }
 .cntbutton{
     padding: 16px 25px;
@@ -75,15 +83,14 @@ li{
     border-radius: 40px;
     background-color: #fff;
     box-shadow: 0 4px 11px 0 rgba(146, 96, 0, 0.35);
-    -webkit-transition: all 200ms ease;
-    transition: all 200ms ease;
     font-family: Montserrat, sans-serif;
     font-size: 11px;
-    flex-wrap: wrap;
     font-weight: 600;
     letter-spacing: 2px;
     text-transform: uppercase;
     color: #3C4AED;
+
+
 }
 .block{
     width: 1200px;
