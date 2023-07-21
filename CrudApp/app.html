@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee DB</title>
+    <link rel="stylesheet" href="./content/css/style.css">
+    <script src="./content/javascript/script.js"></script>
+</head>
+
+<body>
+    <table class="optable">
+        <tr>
+            <td>
+                <form onsubmit="event.preventDefault();apply();" autocomplete="off">
+                    <div>
+                        <label for="">FullName</label>
+                        <input type="text" name="fullName" id="fullName">
+                    </div>
+                    <div>
+                        <label for="">LastName</label>
+                        <input type="text" name="lastName" id="lastName">
+                    </div>
+                    <div>
+                        <label for="">Email</label>
+                        <input type="text" name="email" id="email">
+                    </div>
+                    <div>
+                        <label for="">salary</label>
+                        <input type="text" name="salary" id="salary">
+                    </div>
+                    <div class="form-submit">
+                        <input type="submit" value="SUBMIT">
+                    </div>
+                </form>
+            </td>
+            <td>
+                <table class="emp-list" id="employeeList">
+                    <thead>
+                        <tr class="emp-list-tr">
+                            <th class="emp-list-th">FirstName</th>
+                            <th class="emp-list-th">LastName</th>
+                            <th class="emp-list-th">Email</th>
+                            <th class="emp-list-th">Salary</th>
+                            <th class="emp-list-th">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+    
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+
+</html>
