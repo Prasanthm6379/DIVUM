@@ -166,6 +166,7 @@ li{
 
 .icons-ul{
     display: flex;
+    margin-left: 25%;
 }
 
 .client-head{
@@ -176,10 +177,15 @@ li{
 .icons-ul li{
     padding-right: 20px;
     cursor: pointer;
+    font-size: 12px;
+    margin: auto;
+    color: #333;
+    font-weight: 800;
 }
 
 .icons-ul li:hover{
     color: #096ad0;
+    border-bottom: 3px;
     border-bottom: #096ad0;
 }
 
@@ -188,7 +194,7 @@ li{
     
 }
 .socialnav{
-    font-size: 36px;
+    font-size: px;
     font-weight: 700;
     text-align: center;
     justify-content: center;
@@ -201,4 +207,43 @@ li{
     margin-top: 20px;
     padding-top: 5rem;
 }
+.ewarp{
+    display: grid;
+    width: 90rem;
+    grid-template-columns: 1fr 1fr;
+    align-content: center;
+    margin: auto;
+}
+.ewarp-sub{
+    margin: auto;
+    text-align: center;
+    cursor: pointer;
+    padding-left: 10rem;
+}
+.ewarp-sub-head{
+    text-align: center;
+    padding-top: 2rem;
+    font-size: 16px;
+    font-weight: bold;
+}
+.ewarp-sub-txt{
+    text-align: center;
+    padding-top: 2rem;
+    font-size: 12px;
+    opacity: 50%;
+}
+.part-wrap{
+    width: 33.33%;
+    background-color: #096ad0;
+}
+.wp{
+    float: right;
+    position: fixed;
+    bottom: 20px;
+    right:10px;
+}
+.wp-img{
+    width: 50px;
+}
+
 

@@ -1,0 +1,68 @@
+body > table{
+    width: 80%;
+}
+.optable{
+    margin: auto;
+    margin-top: 10%;
+    border: 3px solid #000;
+}
+.emp-list{
+    border: 3px solid #000;
+    margin: auto;
+}
+th{
+    background-color: #ececec;
+    color: black;
+    font-size: 17px;
+    font-weight: 100;
+    font-family: 'Courier New', Courier, monospace;
+}
+table{
+    border-collapse: collapse;
+}
+label{
+    font-size: 20px;
+    font-weight: 500;
+    font-family:sans-serif
+}
+table.list{
+    width:100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+input[type=text], input[type=number] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input[type=submit]{
+    width: 30%;
+    background-color: #ddd;
+    color: #000;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+form div.form-submit{
+    text-align: right;
+}
+
+button{
+    cursor: pointer;
+    text-decoration: underline;
+    color: #0000ee;
+    margin-right: 4px;
+}
