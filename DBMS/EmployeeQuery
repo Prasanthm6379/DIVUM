@@ -1,0 +1,17 @@
+create table employee(
+	id int primary key,
+	ename text,
+	salary int,
+	eaddress text
+);
+
+
+insert into employee(id,ename,salary,eaddress) values (101,'sakthi',12000,'Tirupur');
+insert into employee(id,ename,salary,eaddress) values (102,'Gopi',12000,'Chennai');
+insert into employee(id,ename,salary,eaddress) values (103,'Uma',12000,'Pollachi');
+
+update employee set salary=13000 where id=102;
+
+delete from employee where id=101;
+
+select id,ename,salary,eaddress from employee e;
