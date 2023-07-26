@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crud with api</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1 style="text-align: center;">Todos</h1>
+    <form action="">
+        <label for="UserId">UserId</label>
+        <input type="text" name="UserId" id="UserId">
+        <label for="Title">Title</label>
+        <input type="text" name="title" id="title">
+        <label for="completed1">true</label>
+        <input type="radio" name="completed1" id="completed" value="true">
+        <label for="completed1">false</label>
+        <input type="radio" name="completed1" id="completed" value="false">
+        <input type="submit" value="submit" onclick="addtodo()">
+        <input type="button" name="Edit" id="edit" value="Edit">
+    </form>
+    <table id="todos" class="todo-table"></table>
+
+    <script src="script.js"></script>
+</body>
+</html>
