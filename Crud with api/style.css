@@ -1,0 +1,13 @@
+.todo-table{
+    margin: auto;
+}
+.todo-table tr{
+    align-items: center;
+    align-content: center;
+}
+.todo-table td{
+    padding: 1rem;
+}
+.todo-table th{
+    padding: 1rem;
+}
