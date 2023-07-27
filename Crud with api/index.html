@@ -1,27 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crud with api</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <h1 style="text-align: center;">Todos</h1>
-    <form action="">
-        <label for="UserId">UserId</label>
-        <input type="text" name="UserId" id="UserId">
-        <label for="Title">Title</label>
-        <input type="text" name="title" id="title">
-        <label for="completed1">true</label>
-        <input type="radio" name="completed1" id="completed" value="true">
-        <label for="completed1">false</label>
-        <input type="radio" name="completed1" id="completed" value="false">
-        <input type="submit" value="submit" onclick="addtodo()">
-        <input type="button" name="Edit" id="edit" value="Edit">
-    </form>
-    <table id="todos" class="todo-table"></table>
+    <div class="button-region">
+        <button id="add-todo" class="todo-buttons" onclick="addtodoform()">Add Todo</button>
+        <button id="edit-todo" class="todo-buttons" onclick="edittodoform()">Edit</button>
+        <button id="delete-todo" class="todo-buttons" onclick="deletetodoform()">Delete</button>
+    </div>
+    <div class="add-todo-form" id="todo-form">
+        <form action="" autocomplete="off">
+            <div class="feilds">
+                <label for="UserId">USERID</label>
+                <input type="text" name="UserId" id="UserId">
+            </div>
+            <div class="feilds">
+                <label for="Title">TITLE</label>
+                <input type="text" name="title" id="title">
+            </div>
+            <div class="feilds">
+                <label for="completed1" class="feilds">TRUE</label>
+                <input type="radio" name="completed1" id="completed" value="true">
+                <label for="completed1" class="feilds">FALSE</label>
+                <input type="radio" name="completed1" id="completed" value="false">
+            </div>
+            <div class="feilds">
+                <input type="button" value="SUBMIT" onclick="addtodo()" class="todo-buttons">
+            </div>
+        </form>
+    </div>
+    <div class="edit-form" id="edit-form">
+        <form action="" autocomplete="off">
+            <div class="feilds">
+                <label for="id">Enter the ID to be edited</label>
+                <input type="text" name="id" id="id">
+            </div>
+            <div>
+                <input type="button" name="edit" onclick="edittodo()" value="EDIT" class="todo-buttons">
+            </div>
+        </form>
+    </div>
+    <div class="delete-form" id="delete-form">
+        <form action="" autocomplete="off">
+            <div class="feilds">
+                <label for="id">Enter the ID to be deleted</label>
+                <input type="text" name="delid" id="delid">
+            </div>
+            <div>
+                <input type="button" name="delete" onclick="deletetodo()" value="DELETE" class="todo-buttons">
+            </div>
+        </form>
+    </div>
+    <div class="edit-form" id="edited-form">
+        <form action="">
+            <div class="feilds">
+                <label for="UserId">USERID</label>
+                <input type="text" name="UserId" id="eUserId">
+            </div>
+            <div class="feilds">
+                <label for="Title">TITLE</label>
+                <input type="text" name="title" id="etitle">
+            </div>
+            <div class="feilds">
+                <label for="completed1" class="feilds">TRUE</label>
+                <input type="radio" name="completed1" id="ecompleted" value="true">
+                <label for="completed1" class="feilds">FALSE</label>
+                <input type="radio" name="completed1" id="ecompleted" value="false">
+            </div>
+            <div class="feilds">
+                <input type="button" value="SUBMIT" onclick="updatetodo()" class="todo-buttons">
+            </div>
+        </form>
+    </div>
+    <table class="todo-table">
+        <thead>
+            <tr>
+                <th>USERID</th>
+                <th>ID</th>
+                <th>TITLE</th>
+                <th>COMPLETED</th>
+            </tr>
+        </thead>
+        <tbody id="todos">
+
+        </tbody>
+    </table>
 
     <script src="script.js"></script>
 </body>
+
 </html>
