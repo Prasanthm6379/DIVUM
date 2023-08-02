@@ -50,6 +50,20 @@ function addtodoform() {
 }
 
 function addtodo() {
+    if (document.getElementById("UserId").value == '') {
+        // console.log("hi");
+        alert("Please fill userid");
+        return false;
+    }
+    if (document.getElementById("title").value == '') {
+        // console.log("title")
+        alert("Please fill title");
+        return false;
+    }
+    if (document.getElementById("completed").value == "") {
+        alert("Please select completed feild");
+        return false;
+    }
     let data = {
         userId: document.getElementById("UserId").value,
         id: size + 1,
@@ -68,6 +82,10 @@ function edittodoform() {
     document.getElementById("edit-form").style.display = "block";
 }
 async function edittodo() {
+    if(document.getElementById("id").value=="" || document.getElementById("id").value<1 || document.getElementById("id").value>200){
+        alert("Please enter a valid id between 1-200");
+        return false;
+    }
     const response = await fetch(url);
     var data = await response.json();
     document.getElementById("edited-form").style.display = "block";
@@ -79,6 +97,14 @@ async function edittodo() {
 }
 
 function updatetodo() {
+    if(document.getElementById("eUserId").value==""){
+        alert("Please fill userid");
+        return false;
+    }
+    if(document.getElementById("etitle").value==""){
+        alert("Please fill title");
+        return false;
+    }
     let eid = document.getElementById("id").value;
     var item = {
         userId: document.getElementById("eUserId").value,
@@ -99,11 +125,16 @@ function deletetodoform() {
     document.getElementById("delete-form").style.display = "block";
 }
 
-function deletetodo(){
+function deletetodo() {
     // console.log(document.getElementById("delid").value);
-    var delurl=url+"/"+document.getElementById("delid").value;
-    fetch(delurl,{
-        method:'DELETE',
+    if(document.getElementById("delid").value=="" || document.getElementById("delid").value<1 || document.getElementById("delid").value>200){
+        alert("Please enter a valid id between 1-200");
+        return false;
+    }
+    var delurl = url + "/" + document.getElementById("delid").value;
+    fetch(delurl, {
+        method: 'DELETE',
     });
     document.getElementById("delete-form").style.display = "none";
+    alert("todo data deleted");
 }
