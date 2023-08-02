@@ -1,0 +1,92 @@
+create table user_table (
+user_id int primary key,
+user_name text,
+user_email text,
+user_password text,
+creation_date date);
+
+
+
+create table profile(
+user_id int,
+foreign key(user_id)references user_table(user_id),
+first_name text,
+last_name text,
+bio text,
+account_type text,
+date_of_birth date
+);
+
+create table post(
+post_id int primary key,
+user_id int,
+foreign key(user_id) references user_table(user_id),
+post_caption text,
+latitude float,
+longitude float,
+creation_date date,
+creation_time time
+);
+
+
+create table reel(
+reel_id int primary key,
+user_id int,
+foreign key(user_id) references user_table(user_id),
+reel_caption text,
+latitude float,
+longitude float,
+creation_date date,
+creation_time time
+);
+
+
+create table post_comment(
+comment_id int primary key,
+post_id int,
+foreign key(post_id) references post(post_id),
+comment_txt text,
+user_id int,
+foreign key(user_id) references user_table(user_id),
+creation_time time,
+creation_date date
+);
+
+create table reel_comment(
+comment_id int primary key,
+reel_id int,
+foreign key(reel_id) references reel(reel_id),
+comment_txt text,
+user_id int,
+foreign key(user_id) references user_table(user_id),
+creation_time time,
+creation_date date
+);
+
+
+create table folowers(
+user_id int,
+foreign key (user_id) references user_table(user_id),
+followers text,
+folloing text);
+
+
+create table notes(
+notes_id int primary key,
+user_id int,
+foreign key(user_id) references user_table(user_id),
+notes_txt text);
+
+
+create table story(
+story_id int primary key,
+user_id int
+foreign key(user_id) references user_table(user_id)
+story_content );
+
+
+create table messages(
+user_id int,
+foreign key (user_id) references user_table(user_id),
+chats text);
+
