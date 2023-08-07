@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+</head>
+
+<body>
+    <h1>Hi, {{ data[0][1] }}</h1>
+    <table border="1" style="text-align: center;">
+        <thead>
+            <th>UID</th>
+            <th>User Name</th>
+            <th>Password</th>
+        </thead>
+        <tbody>
+            {% for row in data[1] %}
+            <tr>
+                {% for d in row %}
+                <td>
+                    {{ d }}
+                </td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+
+</html>
