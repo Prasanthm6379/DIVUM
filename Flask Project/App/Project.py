@@ -25,14 +25,26 @@ def result():
         if form['userid']=="" or form['pass']=="":
             return render_template('failure.html')
         else:
-            cursor.execute("select * from users where (userid=%s)"%int(form['userid']))
-            row=cursor.fetchone()
-            if row:
-                cursor.execute("select * from users")
-                rows=cursor.fetchall()
-                return render_template('home.html',data=[row,rows])
+            if form['userid']=='1':
+                cursor.execute("select * from users where (userid=%s)"%form['userid'])
+                row=cursor.fetchone()
+                if row:
+                    if form['pass']==row[2]:
+                        cursor.execute("select * from users")
+                        rows=cursor.fetchall()
+                        return render_template('home.html',data=[row,rows])
+                    else:
+                        return render_template('failure.html')
+                else:
+                    return render_template('failure.html')
             else:
-                return render_template('failure.html')
+                cursor.execute("select * from users where (userid=%s)"%form['userid'])
+                userdata=cursor.fetchone()
+                if form['pass']==userdata[2]:
+                    return render_template('guest.html',username=userdata[1])
+                else:
+                    return render_template('failure.html')
+                
                 
 
 @app.route('/newuser', methods=['POST','GET'])

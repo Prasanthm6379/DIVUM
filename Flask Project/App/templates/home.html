@@ -5,11 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
+   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='homestyle.css') }}">
 </head>
 
 <body>
     <h1>Hi, {{ data[0][1] }}</h1>
-    <table border="1" style="text-align: center;">
+    <table border="1" class="op">
         <thead>
             <th>UID</th>
             <th>User Name</th>
