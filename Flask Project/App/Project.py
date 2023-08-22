@@ -1,4 +1,4 @@
-from flask import Flask,redirect,url_for,request,render_template
+from flask import Flask,request,render_template
 import psycopg2 as psy
 con=psy.connect(
     database="FlaskProject",
@@ -23,27 +23,23 @@ def result():
     if request.method=='POST':
         form=request.form
         if form['userid']=="" or form['pass']=="":
-            return render_template('failure.html')
+            # print( "<script> alert('Please enter all feilds')</script>")
+            return render_template('index.html')
         else:
-            if form['userid']=='1':
-                cursor.execute("select * from users where (userid=%s)"%form['userid'])
-                row=cursor.fetchone()
-                if row:
-                    if form['pass']==row[2]:
-                        cursor.execute("select * from users")
+            cursor.execute('select * from users where userid=%s'%form['userid'])
+            userdata=cursor.fetchone()
+            if userdata:
+                if userdata[2]==form['pass']:
+                    if form['userid']=='1':
+                        cursor.execute('select * from users')
                         rows=cursor.fetchall()
-                        return render_template('home.html',data=[row,rows])
+                        return render_template('home.html',data=rows)
                     else:
-                        return render_template('failure.html')
+                        return render_template('guest.html',username=userdata[1])
                 else:
-                    return render_template('failure.html')
+                    return render_template('index.html',flag=True)
             else:
-                cursor.execute("select * from users where (userid=%s)"%form['userid'])
-                userdata=cursor.fetchone()
-                if form['pass']==userdata[2]:
-                    return render_template('guest.html',username=userdata[1])
-                else:
-                    return render_template('failure.html')
+                return render_template('index.html',notfound=True)
                 
                 
 
@@ -51,12 +47,35 @@ def result():
 def addNewUser():
     form=request.form
     if(form['userid']=="" or form['uname']=="" or form['pass']=="" or form['conpass']==""):
-        return "<h1>Please fill all fealds</h1><a href='http://127.0.0.1:5000/register'>click here to go back!</a>"
+        # return "<h1>Please fill all fealds</h1><a href='http://127.0.0.1:5000/register'>click here to go back!</a>"
+        return render_template('register.html')
     elif(form['pass']!=form['conpass']):
-        return "<h1>Password does not match!</h1><a href='http://127.0.0.1:5000/register'>click here to go back!</a>"
+        # return "<h1>Password does not match!</h1><a href='http://127.0.0.1:5000/register'>click here to go back!</a>"
+        return render_template('register.html')
     else:
         cursor.execute('insert into users(userid,username,pass) values(%s,%s,%s)',[int(form['userid']),form['uname'],form['conpass']])
         con.commit()
-        return "<h1>Register Sucessfull</h1><a href='http://127.0.0.1:5000/'>click here to go back to login!</a>"
+        # return "<h1>Register Sucessfull</h1><a href='http://127.0.0.1:5000/'>click here to go back to login!</a>"
+        return render_template('index.html')
+    
+@app.route('/search',methods=['POST','GET'])
+def search():
+    form=request.form
+    if form['search-id']=='' or form['search']=='':
+        cursor.execute('select * from users')
+        data=cursor.fetchall()
+        return render_template('home.html',flag=True,data=data)
+    if form['search-id']=='uid':
+        cursor.execute('select* from users where userid=%s'%form['search'])
+    else:
+        cursor.execute("select * from users where username like '%s'"%form['search'])
+    row=cursor.fetchall()
+    return render_template('home.html',data=row)
+
+@app.route('/reset',methods=['POST','GET'])
+def reset():
+    cursor.execute('select * from users')
+    data=cursor.fetchall()
+    return render_template('home.html',data=data)
 if __name__=='__main__':
     app.run(debug=True)

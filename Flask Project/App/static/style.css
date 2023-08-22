@@ -1,6 +1,33 @@
 .first-form{
     text-align: center;
+    margin: auto;
 }
 body{
-    background-color:aliceblue aqua;
+    background-color:aliceblue;
+}
+.div1{
+    display: flex;
+    padding-top: 5%;
+    margin: auto;
+    width: 60%;
+    height: 30rem;
+    font-size: 25px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+input[type=text], input[type=password] {
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+input[type=submit],input[type=button]{
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-weight: bolder;
+    padding: 1rem;
+    box-sizing: border-box;
+    cursor: pointer;
+    margin-left: 3rem;
 }
