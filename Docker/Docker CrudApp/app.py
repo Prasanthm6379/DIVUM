@@ -17,6 +17,8 @@ app=Flask(__name__,template_folder='templates')
 def generate():
     return render_template('index.html')
 
+    
+
 @app.route('/register')
 def register():
     return render_template('register.html')
@@ -82,8 +84,3 @@ def reset():
     return render_template('home.html',data=data)
 if __name__=='__main__':
     app.run(host='0.0.0.0',debug=True)
-
-# Perform database operations here
-# ...
-
-# Close the connection
