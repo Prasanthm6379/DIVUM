@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='RegisterStyle.css') }}">
+</head>
+<body>
+    <div class="div1">
+
+        <form action="/newuser" method="POST" onsubmit="validate()" class="reg-form">
+            <h1>Register</h1>
+            <p>
+                <label for="userid">User ID: </label>
+                <input type="text" name="userid" id="userid">
+            </p>
+            <p>
+                <label for="uname">User name: </label>
+                <input type="text" name="uname" id="uname">
+            </p>
+            <p>
+                <label for="pass">Password: </label>
+                <input type="password" name="pass" id="pass">
+            </p>
+            <p>
+                <label for="conpass">Confirm Password: </label>
+                <input type="password" name="conpass" id="conpass"> 
+            </p>
+            <p>
+                <input type="submit" value="SUBMIT">
+            </p>
+        </form>
+        <p>Click <a href="/">here</a> to return to Login</p>
+    </div>
+
+    <script>
+        function validate(){
+
+            if(document.getElementById('userid').value=='' || document.getElementById('uname').value=='' || document.getElementById('pass').value=='' || document.getElementById("conpass").value==""){
+                alert("Please enter all feilds")
+                return false
+            }else if(document.getElementById("pass").value!=document.getElementById("conpass").value){
+                alert("Password does not match")
+                return false
+            }else{
+                alert("Register sucessfull")
+            }
+        }
+    </script>
+</body>
+</html>

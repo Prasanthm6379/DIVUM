@@ -1,0 +1,249 @@
+.video_head{
+    background-color: #3C4AED;
+    flex-wrap: wrap;
+}.logo{
+    padding-left: 25px;
+    padding-top: 25px;
+    margin-left: 20%;
+    flex-wrap: wrap;
+}
+.header_text{
+    font-size: 45px;
+    color: aliceblue;
+    justify-content:center;
+    font-family: Montserrat, sans-serif;
+    max-width: 70rem;
+    text-align: center;
+    align-items: center;
+    margin: auto;
+    padding-top: 3rem;
+}
+.navbar{
+    position: relative;
+    float: right;
+    margin-right: 25px;
+    display: flex;
+    color: antiquewhite;
+    flex-wrap: wrap;
+    
+}
+
+.navbar ul li{
+    text-decoration: none;
+    color: antiquewhites;
+    flex-wrap: wrap;
+}
+a{
+    color: antiquewhite;
+    text-decoration: none;
+    flex-wrap: wrap;
+}
+li{
+    text-decoration: none;
+    display: inline;
+    float: right;
+    margin-right: 50px;
+    font-size: 25px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+.video{
+    flex-wrap: wrap;
+    padding-bottom: 2rem;
+    text-align: center;
+    padding-bottom: 8rem;
+    
+}
+.para1{
+    justify-content: center;
+    text-align: center;
+    margin-left: 40px;
+    margin-right: 50px;
+    margin-top: 100px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 25px;
+    display: block;
+    flex-wrap: wrap;
+}
+.para2{
+    opacity: 50%;
+    text-align: center;
+    flex-wrap: wrap;
+}
+.mainbody{
+    margin: 0%;
+    flex-wrap: wrap;
+    background-color:aliceblue ;
+
+    font-family: Montserrat, sans-serif;
+}
+.cntbutton{
+    padding: 16px 25px;
+    border: 1px none #096ad0;
+    border-radius: 40px;
+    background-color: #fff;
+    box-shadow: 0 4px 11px 0 rgba(146, 96, 0, 0.35);
+    font-family: Montserrat, sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #3C4AED;
+
+
+}
+.block{
+    width: 1200px;
+    height: 500px;
+    margin: auto;
+    display: flex;
+    padding-top: 50px;
+}
+.left{
+    width: 600px;
+    height: 500px;
+}.right{
+    width: 600px;
+    height: 500px;
+}
+.heading{
+    font-size: 25px;
+    font-family: Montserrat, sans-serif;
+    text-decoration: solid;
+}
+.txt{
+    opacity: 50%;
+    font-size: 20px;
+    font-family: Montserrat, sans-serif;
+}
+.readmore{
+    color: #096ad0;
+    flex-wrap: wrap;
+    text-decoration: underline;
+    font-size: 15px;
+}
+.block3{
+    width: 1800px;
+    height: 1080px;
+    background-color: #096ad0;
+    margin: auto;
+}
+.block3_1{
+    width: 1700px;
+    height: 1080px;
+    display: flex;
+    margin:auto;
+}
+.wrapper{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-content: center;
+    margin-right: 25rem;
+}
+.g2{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+.g1{
+    justify-content: end;
+    text-align:right;
+    margin: auto;
+    font-weight:900;
+    color: #333;
+    margin-bottom: 40px;
+    max-width: 5rem;
+    margin-right: 4rem;
+    display: flex;
+}
+.innerp{
+    width: 75%;
+    font-size: 1rem;
+    font-weight: 400;
+    text-decoration: solid;
+    color: #565656;
+    text-align: left;
+}
+
+.icons-ul{
+    display: flex;
+    margin-left: 25%;
+}
+
+.client-head{
+    text-align: center;
+    font-size: 30px;
+}
+
+.icons-ul li{
+    padding-right: 20px;
+    cursor: pointer;
+    font-size: 12px;
+    margin: auto;
+    color: #333;
+    font-weight: 800;
+}
+
+.icons-ul li:hover{
+    color: #096ad0;
+    border-bottom: 3px;
+    border-bottom: #096ad0;
+}
+
+.client-img-8, .client-img-2, .client-img-3, .client-img-4, .client-img-5, .client-img-6,.client-img-7{
+    display: none;
+    
+}
+.socialnav{
+    font-size: px;
+    font-weight: 700;
+    text-align: center;
+    justify-content: center;
+    margin: auto;
+    font-family: Montserrat, sans-serif;
+}
+
+.client-img{
+    text-align: center;
+    margin-top: 20px;
+    padding-top: 5rem;
+}
+.ewarp{
+    display: grid;
+    width: 90rem;
+    grid-template-columns: 1fr 1fr;
+    align-content: center;
+    margin: auto;
+}
+.ewarp-sub{
+    margin: auto;
+    text-align: center;
+    cursor: pointer;
+    padding-left: 10rem;
+}
+.ewarp-sub-head{
+    text-align: center;
+    padding-top: 2rem;
+    font-size: 16px;
+    font-weight: bold;
+}
+.ewarp-sub-txt{
+    text-align: center;
+    padding-top: 2rem;
+    font-size: 12px;
+    opacity: 50%;
+}
+.part-wrap{
+    width: 33.33%;
+    background-color: #096ad0;
+}
+.wp{
+    float: right;
+    position: fixed;
+    bottom: 20px;
+    right:10px;
+}
+.wp-img{
+    width: 50px;
+}
+
+

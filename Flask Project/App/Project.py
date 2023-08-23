@@ -1,23 +1,18 @@
-from flask import Flask,render_template,request
+from flask import Flask,request,render_template
 import psycopg2 as psy
-
 con=psy.connect(
     database="FlaskProject",
     user="postgres",
     password="123",
-    host="172.17.0.2",
+    host="localhost",
     port='5432'
 )
-
-
 cursor=con.cursor()
 app=Flask(__name__,template_folder='templates')
 
 @app.route('/')
 def generate():
     return render_template('index.html')
-
-    
 
 @app.route('/register')
 def register():
@@ -83,4 +78,4 @@ def reset():
     data=cursor.fetchall()
     return render_template('home.html',data=data)
 if __name__=='__main__':
-    app.run(host='0.0.0.0',debug=True)
+    app.run(debug=True)
