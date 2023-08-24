@@ -1,0 +1,13 @@
+body{
+    background-color: rgb(0, 81, 255);
+}
+.logo{
+    float: left;
+    margin-left: 2rem;
+    margin-top: 1rem;
+}
+.add-button{
+    float: right;
+    margin-right: 2rem;
+    margin-top: 1rem;
+}

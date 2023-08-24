@@ -1,11 +1,11 @@
 from flask import Flask,render_template,request
 import psycopg2 as psy
 
-con=psy.connect(
+con = psy.connect(
     database="FlaskProject",
     user="postgres",
     password="123",
-    host="172.17.0.2",
+    host="localhost",
     port='5432'
 )
 
@@ -15,6 +15,7 @@ app=Flask(__name__,template_folder='templates')
 
 @app.route('/')
 def generate():
+    cursor.execute('create table if not exists users(userid int primary key,username text,pass text)')
     return render_template('index.html')
 
     
@@ -51,6 +52,7 @@ def result():
 @app.route('/newuser', methods=['POST','GET'])
 def addNewUser():
     form=request.form
+    cursor.execute('create table if not exists users(userid int primary key,username text,pass text)')
     if(form['userid']=="" or form['uname']=="" or form['pass']=="" or form['conpass']==""):
         # return "<h1>Please fill all fealds</h1><a href='http://127.0.0.1:5000/register'>click here to go back!</a>"
         return render_template('register.html')
