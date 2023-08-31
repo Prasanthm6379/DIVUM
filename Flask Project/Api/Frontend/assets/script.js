@@ -1,4 +1,4 @@
-var details = [];
+// export const myvar=["SAKTHI","PRASANTH"];
 async function getapi() {
     let url = "http://127.0.0.1:5000/getDetails"
     const response = await fetch(url);
@@ -33,17 +33,19 @@ async function edit(email) {
     const response = await fetch(url);
     var data = await response.json();
     row = data[0][0]
-    details.push(row)
+    // myvar.push(row)
     sessionStorage.setItem('email', row[0])
     sessionStorage.setItem('fname', row[1])
     sessionStorage.setItem('lname', row[2])
     sessionStorage.setItem('mob', row[3])
     sessionStorage.setItem('address', row[4])
     sessionStorage.setItem('dob', row[5])
-    location.replace('edit.html')
+    location='./edit.html'
+    // location.href = './edit.html'
 }
 
 function editForm() {
+    // console.log(myvar);
     document.getElementById('firstName').value = sessionStorage.getItem('fname')
     document.getElementById('lastName').value = sessionStorage.getItem('lname')
     document.getElementById('email').value = sessionStorage.getItem('email')
@@ -53,22 +55,22 @@ function editForm() {
 }
 
 function check() {
-    if (document.getElementById('firstName').value == "") {
+    if (!document.getElementById('firstName').value === "") {
         alert("Please fill first name")
         return false
-    } else if (document.getElementById('lastName').value == "") {
+    } else if (document.getElementById('lastName').value === "") {
         alert("Please fin in last name")
         return false
-    } else if (document.getElementById('email').value == "") {
+    } else if (document.getElementById('email').value === "") {
         alert("Please fill in email")
         return false
-    } else if (document.getElementById('mobile').value == "") {
+    } else if (document.getElementById('mobile').value === "") {
         alert("Please fill in mobile")
         return false
-    } else if (document.getElementById('address').value == "") {
+    } else if (document.getElementById('address').value === "") {
         alert("Please fill in address")
         return false
-    } else if (document.getElementById('dateOfBirth').val === "") {
+    } else if (document.getElementById('dateOfBirth').value === "") {
         alert("Please select a date")
         return false
     }
@@ -122,7 +124,6 @@ function lname() {
         document.getElementById('lname-err').style.display = "block"
     }
 }
-
 
 
 function deleteDetail(email) {

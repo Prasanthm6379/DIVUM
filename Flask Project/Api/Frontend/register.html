@@ -19,53 +19,57 @@
             <h1 class="head-txt">ADD DETAILS</h1>
         </div>
     </div>
-    <table style="margin: auto;">
-        <tr>
-            <td>
-                <form autocomplete="off" action="./index.html" id="userForm" onsubmit="return check()">
-                    <div>
-                        <label for="">Fisrt Name</label>
-                        <input type="text" name="firstName" id="firstName" placeholder="First Name" onchange="fname()">
-                        <p id="fname-err" class="fname-err">Please enter only Alphabets</p>
-                    </div>
-                    <div>
-                        <label for="">LastName</label>
-                        <input type="text" name="lastName" id="lastName" placeholder="Last Name" onchange="lname()" >
-                        <p id="lname-err" class="lname-err">Please enter only Alphabets</p>
-                    </div>
-                    <div>
-                        <label for="">Email</label>
-                        <input type="email" name="email" id="email" placeholder="Email" onchange="mail()">
-                        <p id="email-exist" class="email-err">Email already exist</p>
-                        <p id="email-err" class="email-err">Please enter a valid email</p>
+    <div class="form">
+        <table style="margin: auto;">
+            <tr>
+                <td>
+                    <form autocomplete="off" action="./index.html" id="userForm" onsubmit="return check()">
+                        <div>
+                            <label for="firstName">FIRST NAME *</label>
+                            <input type="text" name="firstName" id="firstName" placeholder="First Name"
+                                onchange="fname()">
+                            <p id="fname-err" class="fname-err">Please enter only Alphabets</p>
+                        </div>
+                        <div>
+                            <label for="lastName">LAST NAME *</label>
+                            <input type="text" name="lastName" id="lastName" placeholder="Last Name" onchange="lname()">
+                            <p id="lname-err" class="lname-err">Please enter only Alphabets</p>
+                        </div>
+                        <div>
+                            <label for="email">EMAIL *</label>
+                            <input type="email" name="email" id="email" placeholder="Email" onchange="mail()">
+                            <p id="email-exist" class="email-err">Email already exist</p>
+                            <p id="email-err" class="email-err">Please enter a valid email</p>
 
 
-                    </div>
+                        </div>
 
-                    <div>
-                        <label for="">Mobile</label>
-                        <input type="tel" name="mob" id="mobile" pattern="[0-9]{10}" max="10" placeholder="Mobile Number"
-                            maxlength="10">
-                    </div>
-                    <div>
-                        <label for="">Address</label>
-                        <input type="address" name="address" id="address" maxlength="50" size="50" placeholder="Max 50" onchange="mob()">
-                    </div>
-                    <div>
-                        <label for="">Date of Birth</label>
-                        <input type="date" name="dateOfBirth" id="dateOfBirth" max="2023-08-23">
-                    </div>
-                    <div class="buttons">
-                        <input type="submit" value="SUBMIT"><div style="width: 5rem;"></div>
-                        <a href="./index.html" class="back-button">
-                            <input type="button" name="back" id="back" value="Go Back">
-                        </a>
-                    </div>
-                </form>
-            </td>
-        </tr>
-    </table>
-    <script src="./assets/regscript.js"/>
+                        <div>
+                            <label for="mob">MOBILE *</label>
+                            <input type="tel" name="mob" id="mobile" pattern="[0-9]{10}" max="10" placeholder="Mobile Number" maxlength="10" onchange="mobile()">
+                        </div>
+                        <div>
+                            <label for="address">ADDRESS *</label>
+                            <input type="textarea" name="address" id="address" maxlength="50" size="50"
+                                placeholder="Max 50">
+                        </div>
+                        <div>
+                            <label for="dateOfBirth">DATE OF BIRTH *</label>
+                            <input type="date" name="dateOfBirth" id="dateOfBirth" max="2023-08-23">
+                        </div>
+                        <div class="buttons">
+                            <input type="submit" value="SUBMIT">
+                            <div style="width: 5rem;"></div>
+                            <a href="./index.html" class="back-button">
+                                <input type="button" name="back" id="back" value="Go Back">
+                            </a>
+                        </div>
+                    </form>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <script src="./assets/regscript.js"></script>
 </body>
 
 </html>

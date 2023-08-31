@@ -7,9 +7,27 @@ body{
     text-align: center;
     font-size: 3rem;
 }
+.form label{
+    font-weight: 600;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 1.2rem;
+    color: black;
+    padding-left: 1rem;
+}
+.form{
+    display: flex;
+    background-color: aliceblue;
+    width: 40%;
+    height: 49rem;
+    border-radius: 3rem;
+    margin: auto;
+    justify-content: center;
+    box-sizing: border-box;
+    box-shadow:#ccc;
+}
 .reg-form{
     font-size: 18px;
-    color: aliceblue;
+    color: black;
     text-align: left;
 }
 input{
@@ -48,7 +66,7 @@ input[type="button"]{
 }
 .fname-err, .lname-err, .email-err{
     text-align: right;
-    color:white;
+    color:red;
     display: none;
 }
 .buttons{

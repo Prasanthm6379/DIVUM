@@ -42,7 +42,7 @@ def mails():
 @app.route('/getDetails',methods=['GET'])
 def getAll():
     try:
-        cursor.execute('select email,firstName,lastName,mobile,dateOfBirth from details order by updateDate desc limit 10')
+        cursor.execute('select email,firstName,lastName,mobile,dateOfBirth from details order by updateDate desc')
         data=cursor.fetchall()
         if data:
             res=[]
@@ -65,10 +65,11 @@ def getAll():
 def add():
     data=request.get_json()
     data=json.dumps(data)
+
     if request.method=='POST':
         try:
             data=request.get_json()
-            print(data)
+            # print(data)
             date=datetime.now()
             # date=str(date.year)+"-"+str(date.month)+"-"+str(date.day)
             cursor.execute('insert into details(firstName,lastName,mobile,email,dateOfBirth,address,createDate,updateDate) values (%s,%s,%s,%s,%s,%s,%s,%s)',

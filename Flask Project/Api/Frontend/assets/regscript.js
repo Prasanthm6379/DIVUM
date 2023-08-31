@@ -1,5 +1,9 @@
+import { myvar } from "./script";
+
+console.log(myvar);
+
 const today = new Date().toISOString().split('T')[0];
-document.getElementById('dateOfBirth').setAttribute('max',String(today))
+document.getElementById('dateOfBirth').setAttribute('max', String(today))
 
 function mail() {
     if (/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(document.getElementById('email').value)) {
@@ -10,17 +14,17 @@ function mail() {
     }
     getmails()
 }
-function checkmail(data){
+function checkmail(data) {
     for (let i = 0; i < data.length; i++) {
         let row = data[i]
-        console.log(row['email'][0])
+        // console.log(row['email'][0])
         if (String(row['email'][0]) == String(document.getElementById('email').value)) {
-            console.log('work')
+            // console.log('work')
             document.getElementById('email-exist').style.display = 'block'
-            document.getElementById('email').value=""
+            document.getElementById('email').value = ""
             return false
         } else {
-            console.log(row['email'][0]+"<->"+document.getElementById('email').value)
+            // console.log(row['email'][0] + "<->" + document.getElementById('email').value)
             document.getElementById('email-exist').style.display = 'none'
         }
     }
@@ -34,12 +38,16 @@ function fname() {
     var txt = document.getElementById('firstName').value
     if (/^[A-Za-z]+$/.test(txt)) {
         document.getElementById('fname-err').style.display = "none"
+    } else if (document.getElementById('firstName').value == "") {
+        document.getElementById('fname-err').innerHTML = "Please Fill in"
+        document.getElementById('fname-err').style.display = "block"
     } else {
+        document.getElementById('fname-err').innerHTML = "Please enter only alphabets"
         document.getElementById('fname-err').style.display = "block"
     }
-    let data=document.getElementById('userForm')
-    let fd= new FormData(data)
-    console.log(fd[0])
+    let data = document.getElementById('userForm')
+    let fd = new FormData(data)
+    // console.log(fd[0])
 
 }
 
@@ -76,15 +84,17 @@ function check() {
     }
     addDetail()
 }
-function mob(){
-    if(document.getElementById('mobile').value.length!=10){
-        document.getElementById('mob-err').style.display='block'
-    }else{
-        document.getElementById('mob-err').style.display='none'
+
+
+function mobile() {
+    if (document.getElementById('mobile').value.length != 10) {
+        document.getElementById('mob-err').style.display = 'block'
+    } else {
+        document.getElementById('mob-err').style.display = 'none'
     }
 }
-const addDetail = async() => {
-   const response = await fetch('http://localhost:5000/details', {
+const addDetail = async () => {
+    const response = await fetch('http://localhost:5000/details', {
         method: 'POST',
         body: JSON.stringify({
             firstName: document.getElementById('firstName').value,
