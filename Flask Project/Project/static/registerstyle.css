@@ -1,0 +1,59 @@
+body{
+    color: aliceblue;
+    background-color: rgb(38, 105, 250);
+}
+.head-txt{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    text-align: center;
+    font-size: 3rem;
+}
+.reg-form{
+    font-size: 18px;
+    color: aliceblue;
+    text-align: left;
+}
+input{
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 18px;
+}
+.title-bar{
+    display: flex;
+    justify-content: left;
+    padding-left: 2rem;
+    width:100px;
+    height:50px
+}
+.title{
+    justify-content: center;
+}
+
+#address{
+    height: 7rem;
+}
+input[type="address"]::placeholder{
+    text-align: right;
+}
+input[type="submit"]{
+    border-radius: 2rem;
+    width: 50%;
+}
+input[type="button"]{
+    border-radius: 2rem;
+}
+.fname-err, .lname-err, .email-err{
+    text-align: right;
+    color: rgb(255, 82, 82);
+    display: none;
+}
+.buttons{
+    display: flex   ;
+}
+.back-button{
+    width: 50%;
+}

@@ -5,7 +5,7 @@ async function getapi(url) {
     var data = await response.json();
     // var data;
     // fetch(url).then((response) => response.json()).then((data) =>  console.log(data));
-    size = data.length;
+    // size = data.length;
     show(data);
 }
 getapi(url);

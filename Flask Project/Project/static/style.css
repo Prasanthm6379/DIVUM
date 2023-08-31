@@ -1,13 +1,54 @@
 body{
-    background-color: rgb(0, 81, 255);
+    background-color: rgb(38, 105, 250);
+}
+.bar{
+    justify-content:space-between;
+    display: flex;
 }
 .logo{
     float: left;
-    margin-left: 2rem;
-    margin-top: 1rem;
+    padding: 3rem;
+    width:100px;
+    height:50px
 }
 .add-button{
-    float: right;
-    margin-right: 2rem;
-    margin-top: 1rem;
+    cursor: pointer;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    border-radius: 2rem;
+    font-size: 18px;
+    border-style:hidden;
+    background-color: antiquewhite;
 }
+.add-button:hover{
+    background-color: rgb(47, 0, 255);
+    color: aliceblue;
+    border: 2px solid black;
+}
+
+.op-table{
+    font-size: 18px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-color:blanchedalmond;
+    text-align: center;
+    margin: auto;
+    border-spacing: 2rem;
+    border-collapse: separate;
+    border: 2px solid black;
+}
+
+.action-buttons{
+    padding: 5px;
+    border-radius: 1rem;
+    background-color:rgb(47, 0, 255);
+    color: whitesmoke;
+    border-style: none;
+
+}
+/* .action-buttons:hover{
+    color: rgb(47, 0, 255);
+    background-color: whitesmoke;
+    border-color: black;
+} */
