@@ -21,6 +21,8 @@ cursor = con.cursor()
 def getOne(mail):
     cursor.execute('select email,firstName,lastName,mobile,address,dateOfBirth from details where email=%s',[mail])
     data=cursor.fetchall()
+    # 25-01-2002
+    # print(data)
     return jsonify(data,200)
 
 
@@ -28,21 +30,21 @@ def getOne(mail):
 def mails():
     cursor.execute('select email from details')
     data=cursor.fetchall()
-    if data:
+    try:
         res=[]
         for mail in data:
             res.append({
                 'email':mail
             })
         return jsonify(res)
-    else:
-        return Response("error",400)
+    except Exception as e:
+        return Response("Error: ",e)
 
 
 @app.route('/getDetails',methods=['GET'])
 def getAll():
     try:
-        cursor.execute('select email,firstName,lastName,mobile,dateOfBirth from details order by updateDate desc')
+        cursor.execute('select email,firstName,lastName,mobile,dateOfBirth from details order by updateDate desc limit 10')
         data=cursor.fetchall()
         if data:
             res=[]
@@ -52,52 +54,55 @@ def getAll():
                     'firstName':user[1],
                     'lastName':user[2],
                     'mobile':user[3],
-                    'address':user[4]
+                    'dateOfBirth':user[4]
                 })
             return jsonify(res)
         else:
             return Response("error")
-    except:
-        return Response("Something went wrong")
+    except Exception as e:
+        return Response("Error: ",e)
     
 
 @app.route('/details',methods=['POST','PUT'])
 def add():
-    data=request.get_json()
-    data=json.dumps(data)
-
     if request.method=='POST':
         try:
             data=request.get_json()
             # print(data)
             date=datetime.now()
             # date=str(date.year)+"-"+str(date.month)+"-"+str(date.day)
+            # dob=data['dateOfBirth'][8:10]+"-"+data['dateOfBirth'][5:7]+"-"+data['dateOfBirth'][0:4]
+            # print(dob)
             cursor.execute('insert into details(firstName,lastName,mobile,email,dateOfBirth,address,createDate,updateDate) values (%s,%s,%s,%s,%s,%s,%s,%s)',
                         [data['firstName'],data['lastName'],data['mobile'],data['email'],data['dateOfBirth'],data['address'],date,date])
             con.commit()
             return Response("success",200)
-        except:
-            return Response("Something went wrong", 400)
+        except Exception as e:
+            return Response("Error: "+e)
     elif request.method=='PUT':
         try:
             data=request.get_json()
             date=datetime.now()
-            # date=str(date.year)+"-"+str(date.month)+"-"+str(date.day)
+            # date=str(date.year)+"-"+str(date.month)+"-"+str(date.day
+            # dob=data['dateOfBirth'][8:10]+"-"+data['dateOfBirth'][5:7]+"-"+data['dateOfBirth'][0:4]
+
             cursor.execute(
                 'UPDATE details SET firstName=%s, lastName=%s, mobile=%s, dateOfBirth=%s, address=%s, updateDate=%s, email=%s WHERE email=%s',
-                (data['firstName'], data['lastName'], data['mobile'], data['dateOfBirth'], data['address'], date, data['email'],data['key'])
+                (data['firstName'], data['lastName'], data['mobile'],data['dateOfBirth'], data['address'], date, data['email'],data['key'])
             )
             con.commit()
             return Response("Edited Sucessfully",200)
-        except:
-            return Response("Something went wrong",400)
+        except Exception as e:
+            return Response("Error :",e)
     
     
 @app.route('/delete/<mail>',methods=['DELETE'])
 def delete(mail):
-    cursor.execute('delete from details where email=%s',[mail])
-    con.commit()
-    return "Deleted Sucessfully"
-
+    try:
+        cursor.execute('delete from details where email=%s',[mail])
+        con.commit()
+        return "Deleted Sucessfully"
+    except Exception as e:
+        return Response("Error :",e)
 if __name__ == '__main__':
     app.run(debug=True, port='5000')

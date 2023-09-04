@@ -1,29 +1,62 @@
 body{
     color: aliceblue;
     background-color: rgb(38, 105, 250);
+    background-image: url(Background.jpg);
 }
+
+.bar {
+    justify-content: space-between;
+    display: flex;
+}
+
+
+
+.back{
+    cursor: pointer;
+    padding: 1rem 2rem 1rem 2rem;
+    border-radius: 2rem;
+    font-size: 18px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    border-style: none;
+    background-color: antiquewhite;
+}
+.back:hover {
+    background-color: rgb(60, 45, 124);
+    color: aliceblue;
+}
+
+
+.logo {
+    float: left;
+    padding: 3rem;
+    width: 100px;
+    height: 50px
+}
+
+
 .head-txt{
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     text-align: center;
-    font-size: 3rem;
+    /* font-size: 3rem; */
 }
 .form label{
-    font-weight: 600;
+    font-weight: 300;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 1.2rem;
     color: black;
-    padding-left: 1rem;
 }
 .form{
+    background-image: url(Form.jpg);
     display: flex;
     background-color: aliceblue;
     width: 40%;
-    height: 49rem;
-    border-radius: 3rem;
+    height:fit-content;
+    border-radius: 1rem;
     margin: auto;
     justify-content: center;
     box-sizing: border-box;
     box-shadow:#ccc;
+    padding: 1rem;
+
 }
 .reg-form{
     font-size: 18px;
@@ -54,8 +87,8 @@ input{
 #address{
     height: 7rem;
 }
-input[type="address"]::placeholder{
-    text-align: right;
+textarea::placeholder{
+    text-align:right;
 }
 input[type="submit"]{
     border-radius: 2rem;

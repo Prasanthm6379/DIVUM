@@ -1,33 +1,46 @@
-import { myvar } from "./script";
-
-console.log(myvar);
-
 const today = new Date().toISOString().split('T')[0];
 document.getElementById('dateOfBirth').setAttribute('max', String(today))
 
+
+
+if (sessionStorage.getItem('key') == 'edit') {
+    document.getElementById('txt').innerHTML = 'EDIT DETAILS'
+    document.getElementById('firstName').value = sessionStorage.getItem('fname')
+    document.getElementById('lastName').value = sessionStorage.getItem('lname')
+    document.getElementById('email').value = sessionStorage.getItem('email')
+    document.getElementById('mobile').value = sessionStorage.getItem('mob')
+    document.getElementById('address').value = sessionStorage.getItem('address')
+    document.getElementById('dateOfBirth').value = sessionStorage.getItem('dob')
+    document.getElementById('email').setAttribute('disabled', true)
+} else {
+    document.getElementById('txt').innerHTML = 'ADD DETAILS'
+}
 function mail() {
     if (/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(document.getElementById('email').value)) {
         document.getElementById('email-err').style.display = "none"
+        getmails()
+        return false
     } else {
         document.getElementById('email-err').style.display = "block"
-
+        getmails()
+        return true
     }
-    getmails()
 }
 function checkmail(data) {
-    for (let i = 0; i < data.length; i++) {
-        let row = data[i]
-        // console.log(row['email'][0])
-        if (String(row['email'][0]) == String(document.getElementById('email').value)) {
-            // console.log('work')
-            document.getElementById('email-exist').style.display = 'block'
-            document.getElementById('email').value = ""
+    let email=document.getElementById('email').value
+
+    data.map((m)=>{
+        // console.log(m['email'][0]);
+        if(m['email'][0]==email){
+            document.getElementById('email-exist').style.display='block'
+            document.getElementById('email').value=""
+            // alert("Exist");
+            return true
+        }else{
+            document.getElementById('email-exist').style.display='none'
             return false
-        } else {
-            // console.log(row['email'][0] + "<->" + document.getElementById('email').value)
-            document.getElementById('email-exist').style.display = 'none'
         }
-    }
+    })
 }
 async function getmails() {
     const response = await fetch('http://localhost:5000/mails');
@@ -38,31 +51,34 @@ function fname() {
     var txt = document.getElementById('firstName').value
     if (/^[A-Za-z]+$/.test(txt)) {
         document.getElementById('fname-err').style.display = "none"
-    } else if (document.getElementById('firstName').value == "") {
+        return false
+    } else if (txt == "") {
         document.getElementById('fname-err').innerHTML = "Please Fill in"
         document.getElementById('fname-err').style.display = "block"
+        return true
     } else {
         document.getElementById('fname-err').innerHTML = "Please enter only alphabets"
         document.getElementById('fname-err').style.display = "block"
+        return true
     }
-    let data = document.getElementById('userForm')
-    let fd = new FormData(data)
-    // console.log(fd[0])
-
 }
 
 function lname() {
     var txt = document.getElementById('lastName').value
     if (/^[A-Za-z]+$/.test(txt)) {
         document.getElementById('lname-err').style.display = "none"
-    } else {
+        return false
+    } else if (txt == "") {
+        document.getElementById('lname-err').innerHTML = "Please Fill in"
         document.getElementById('lname-err').style.display = "block"
+        return true
+    } else {
+        document.getElementById('lname-err').innerHTML = "Please enter only alphabets"
+        document.getElementById('lname-err').style.display = "block"
+        return true
     }
 }
 function check() {
-    fname()
-    lname()
-    mail()
     if (document.getElementById('firstName').value == "") {
         alert("Please fill in first name")
         return false
@@ -81,18 +97,52 @@ function check() {
     } else if (document.getElementById('mobile').value.length != 10) {
         alert('invalid mobile num')
         return false
+    } else if (fname() || lname()) {
+        alert("Please check first and last name")
+        return false
+    } else if (mail()) {
+        alert("Please enter valid email.")
+        return false
     }
-    addDetail()
-}
-
-
-function mobile() {
-    if (document.getElementById('mobile').value.length != 10) {
-        document.getElementById('mob-err').style.display = 'block'
+    if (sessionStorage.getItem('key') == 'register') {
+        addDetail()
     } else {
-        document.getElementById('mob-err').style.display = 'none'
+        editDetail()
     }
 }
+
+
+const editDetail = async () => {
+    const response = await fetch('http://localhost:5000/details', {
+        method: 'PUT',
+        body: JSON.stringify({
+            firstName: document.getElementById('firstName').value,
+            lastName: document.getElementById('lastName').value,
+            mobile: document.getElementById('mobile').value,
+            email: document.getElementById('email').value,
+            dateOfBirth: document.getElementById('dateOfBirth').value,
+            address: document.getElementById('address').value,
+            key: sessionStorage.getItem('email')
+        }),
+        headers: {
+            'Content-type': 'application/json',
+        },
+    })
+    console.log(response);
+}
+
+
+
+function mobileCheck() {
+    let num = document.getElementById('mobile').value
+    if (num > 9999999999){
+        num=(""+num).substring(0,10);
+        document.getElementById('mobile').value=num
+    }
+}
+
+
+
 const addDetail = async () => {
     const response = await fetch('http://localhost:5000/details', {
         method: 'POST',

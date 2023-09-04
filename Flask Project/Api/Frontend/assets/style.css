@@ -1,5 +1,6 @@
 body {
     background-color: rgb(38, 105, 250);
+    background-image: url(Background.jpg);
 }
 
 .bar {
@@ -27,7 +28,7 @@ body {
 }
 
 .add-button:hover {
-    background-color: rgb(47, 0, 255);
+    background-color: rgb(60, 45, 124);
     color: aliceblue;
 }
 
@@ -53,18 +54,27 @@ tbody{
 }
 .op-table th{
     padding: 5px;
-    background-color: #618685;
+    background-color: #3e008f;
     color: aliceblue;
     border:none;
 }
 
 .action-buttons {
+    cursor: pointer;
     padding: 10px;
     border-radius: 1rem;
-    background-color: #618685;
+    background-color: #3e008f;
     color: whitesmoke;
     border-color: blanchedalmond;
 
+}
+.op-table tr:nth-child(even){
+    background-color: #9365cf;
+    color: aliceblue;
+}
+.op-table tr:nth-child(odd){
+    background-color: #7b58aa;
+    color: aliceblue;
 }
 
 .action-buttons:hover {
