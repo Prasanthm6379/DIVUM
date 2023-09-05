@@ -1,8 +1,12 @@
 async function getapi() {
     let url = "http://127.0.0.1:5000/getDetails"
     const response = await fetch(url);
-    var data = await response.json();
-    show(data);
+    if(response.status==204){
+        document.getElementById('table-body').innerHTML=`<tr><td></td><td></td><td>NO</td><td>DATA</td><td></td><td></td><tr>`
+    }else if(response.status==200){
+        var data = await response.json();
+        show(data);
+    }
 }
 function show(data) {
     let tabrow = ``;
@@ -51,7 +55,7 @@ async function edit(email) {
 
 function deleteDetail(email) {
     if (confirm("Are you sure")) {
-        const url = String("http://localhost:5000/delete/" + email)
+        const url ="http://localhost:5000/delete/" + email
         console.log(url)
         fetch(url, {
             method: 'DELETE',

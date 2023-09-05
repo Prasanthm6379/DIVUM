@@ -16,7 +16,7 @@ if (sessionStorage.getItem('key') == 'edit') {
     document.getElementById('txt').innerHTML = 'ADD DETAILS'
 }
 function mail() {
-    if (/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(document.getElementById('email').value)) {
+    if (/^[a-z]+[0-9._-]+@[a-z.-]+\.[a-z]{2,63}$/.test(document.getElementById('email').value) || /^[a-z]+@[a-z.-]+\.[a-z]{2,63}$/.test(document.getElementById('email').value)) {
         document.getElementById('email-err').style.display = "none"
         getmails()
         return false
@@ -30,11 +30,9 @@ function checkmail(data) {
     let email=document.getElementById('email').value
 
     data.map((m)=>{
-        // console.log(m['email'][0]);
         if(m['email'][0]==email){
             document.getElementById('email-exist').style.display='block'
             document.getElementById('email').value=""
-            // alert("Exist");
             return true
         }else{
             document.getElementById('email-exist').style.display='none'
@@ -95,7 +93,7 @@ function check() {
         alert("Please select a date")
         return false
     } else if (document.getElementById('mobile').value.length != 10) {
-        alert('invalid mobile num')
+        alert('Enter 10 digit mobile number')
         return false
     } else if (fname() || lname()) {
         alert("Please check first and last name")

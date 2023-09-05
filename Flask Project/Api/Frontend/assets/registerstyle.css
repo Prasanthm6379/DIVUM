@@ -7,8 +7,12 @@ body{
 .bar {
     justify-content: space-between;
     display: flex;
+    height:3rem;
 }
-
+.screen{
+    display: flex;
+    flex-wrap: wrap;
+}
 
 
 .back{
@@ -48,7 +52,7 @@ body{
     background-image: url(Form.jpg);
     display: flex;
     background-color: aliceblue;
-    width: 40%;
+    /* width: 40%; */
     height:fit-content;
     border-radius: 1rem;
     margin: auto;
@@ -80,9 +84,7 @@ input{
     width:100px;
     height:50px
 }
-.title{
-    justify-content: center;
-}
+
 
 #address{
     height: 7rem;
@@ -94,16 +96,14 @@ input[type="submit"]{
     border-radius: 2rem;
     width: 50%;
 }
-input[type="button"]{
-    border-radius: 2rem;
-}
+
 .fname-err, .lname-err, .email-err{
     text-align: right;
     color:red;
     display: none;
 }
 .buttons{
-    display: flex   ;
+    display: flex;
 }
 .back-button{
     width: 50%;

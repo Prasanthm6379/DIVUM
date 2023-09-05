@@ -58,7 +58,7 @@ def getAll():
                 })
             return jsonify(res)
         else:
-            return Response("error")
+            return Response("No data Present",204)
     except Exception as e:
         return Response("Error: ",e)
     
