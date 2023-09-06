@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="./assets/registerstyle.css">
 </head>
 
-<body>
+<body onload="loader()">
     <div class="bar">
         <div>
             <img src="./assets/Divum_Logo.svg" class="logo" alt="logo">
@@ -36,7 +36,7 @@
                     </div>
                     <div>
                         <label for="email">EMAIL *</label>
-                        <input type="email" name="email" id="email" placeholder="Email" oninput="mail()">
+                        <input type="email" name="email" id="email" placeholder="Email" oninput="mail()" onchange="checkmail()">
                         <p id="no-email" class="email-err">Email already exist</p>
                         <p id="email-exist" class="email-err">Email already exist</p>
                         <p id="email-err" class="email-err">Please enter a valid email</p>

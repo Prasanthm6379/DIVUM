@@ -1,0 +1,7 @@
+{
+  
+  "devDependencies": {
+    "jest": "^29.6.4",
+    "type":"module"
+  }
+}

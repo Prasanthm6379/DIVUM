@@ -7,6 +7,7 @@ async function getapi() {
         var data = await response.json();
         show(data);
     }
+    return true
 }
 function show(data) {
     let tabrow = ``;
@@ -53,13 +54,26 @@ async function edit(email) {
 
 
 
-function deleteDetail(email) {
+function deleteDetail(email,test) {
+    if(test){
+        const url ="http://localhost:5000/delete/" + email
+        fetch(url, {
+            method: 'DELETE',
+        });
+        return true
+    }
     if (confirm("Are you sure")) {
         const url ="http://localhost:5000/delete/" + email
-        console.log(url)
         fetch(url, {
             method: 'DELETE',
         });
         location.reload()
+        return true
     }
+}
+
+
+module.exports={
+    deleteDetail,
+    getapi
 }
