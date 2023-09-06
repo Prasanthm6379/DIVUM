@@ -1,5 +1,5 @@
-const mails = Array()
-let mailFlag = true
+var mails = Array()
+var mailFlag = true
 
 function loader() {
     if (sessionStorage.getItem('key') == 'edit') {
@@ -13,6 +13,7 @@ function loader() {
         document.getElementById('email').setAttribute('disabled', true)
         const today = new Date().toISOString().split('T')[0];
         document.getElementById('dateOfBirth').setAttribute('max', String(today))
+        getmails()
     } else {
         document.getElementById('txt').innerHTML = 'ADD DETAILS'
         const today = new Date().toISOString().split('T')[0];
@@ -27,7 +28,9 @@ async function getmails() {
     const data = await resp.json()
     data.map((m) => {
         mails.push(m['email'][0])
+        ms+=","+m['email'][0]
     })
+    ms=ms.split(',')
 }
 
 function checkmail(data, mail) {
@@ -40,7 +43,6 @@ function checkmail(data, mail) {
         return false
 
     } else {
-
         getmails()
         const em = []
         mails.map((m) => {
@@ -49,7 +51,6 @@ function checkmail(data, mail) {
         let email = document.getElementById('email').value;
         for (let i = 0; i < em.length; i++) {
             if (email == em[i]) {
-                console.log("true");
                 document.getElementById('email-exist').style.display = 'block'
                 mailFlag = true
                 return true
@@ -155,6 +156,7 @@ function check() {
 
     if (sessionStorage.getItem('key') == 'register') {
         if (mail()) {
+            getmails()
             if (mailFlag) {
                 return false
             } else {
@@ -238,11 +240,15 @@ async function addDetail(data) {
 }
 
 
-module.exports = {
-    checkmail,
-    fname,
-    lname,
-    mail,
-    mobileCheck,
-    addDetail,
+try {
+    module.exports = {
+        checkmail,
+        fname,
+        lname,
+        mail,
+        mobileCheck,
+        addDetail,
+    }
+} catch {
+
 }

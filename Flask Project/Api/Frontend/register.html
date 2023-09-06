@@ -36,7 +36,7 @@
                     </div>
                     <div>
                         <label for="email">EMAIL *</label>
-                        <input type="email" name="email" id="email" placeholder="Email" oninput="mail()" onchange="checkmail()">
+                        <input type="email" name="email" id="email" placeholder="Email" oninput="mail()" onblur="checkmail()" onfocus="checkmail()">
                         <p id="no-email" class="email-err">Email already exist</p>
                         <p id="email-exist" class="email-err">Email already exist</p>
                         <p id="email-err" class="email-err">Please enter a valid email</p>

@@ -72,8 +72,11 @@ function deleteDetail(email,test) {
     }
 }
 
-
-module.exports={
-    deleteDetail,
-    getapi
+try{
+    module.exports={
+        deleteDetail,
+        getapi
+    }
+}catch{
+    
 }
