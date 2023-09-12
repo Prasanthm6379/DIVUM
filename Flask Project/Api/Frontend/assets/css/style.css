@@ -1,0 +1,141 @@
+body {
+    background-color: rgb(38, 105, 250);
+    background-image: url(/Frontend/assets/images/Background.jpg);
+}
+.head{
+    text-align: center;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: aliceblue;
+    font-weight: 900;
+}
+.bar {
+    justify-content: space-between;
+    display: flex;
+    height: max-content;
+}
+
+.logo {
+    float: left;
+    padding: 3rem;
+    width: 100px;
+    height: 50px
+}
+.icon{
+    width: 25px;
+}
+.add-button, .signout-button {
+    cursor: pointer;
+    padding: 1rem 2rem 1rem 2rem;
+    border-radius: 2rem;
+    font-size: 18px;
+    border: 1px solid black;
+    transition: all .5s ease-in-out;
+
+}
+
+.add-button:hover , .signout-button:hover{
+    background-color: #3c2d7c;
+    color: aliceblue;
+    background: darken(aliceblue, 5%);
+    transform: scale(1.05);
+    transition: all .3s ease-in-out;
+}
+
+.page-button:hover {
+    background-color: #3c2d7c;
+    color: aliceblue;
+    background: darken(aliceblue, 5%);
+    transform: scale(1.05);
+    transition: all .3s ease-in-out;
+}
+
+.pagination {
+    color: aliceblue;
+    padding: 3px;
+    text-align: center;
+}
+
+.page-button {
+    padding: 10px;
+    border-radius: 2rem;
+    border-style: none;
+    transition: all .5s ease-in-out;
+}
+
+.op-table {
+    border-spacing: 0px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 20px;
+    width: 70%;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    text-align: center;
+    border: 2px solid black;
+    
+}
+
+.op-table th {
+    padding: 5px;
+    background-color: #3e008f;
+    color: aliceblue;
+    border: none;
+}
+
+.op-table td,th {
+    word-wrap: break-word;
+}
+
+.action-buttons {
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 1rem;
+    background-color: #3e008f;
+    color: whitesmoke;
+    border-color: blanchedalmond;
+    border-style: hidden;
+    transition: all .5s ease-in-out;
+
+}
+
+.op-table tr:nth-child(even) {
+    background-color: #9365cf;
+    color: aliceblue;
+}
+
+.op-table tr:nth-child(odd) {
+    background-color: #7b58aa;
+    color: aliceblue;
+}
+
+.action-buttons:hover {
+    color: black;
+    background: darken(white, 5%);
+    transition: all .3s ease-in-out;
+}
+#edit:hover{
+    background-color: #5139ed;
+}
+#del:hover{
+    background-color: red;
+}
+.search{
+    text-align: center;
+}
+input[type="text"]{
+    border: none;
+    padding: 0.2rem 1rem;
+    border-radius: 1rem;
+}
+input[type='button']{
+    cursor: pointer;
+    padding: 0.2rem;
+    border-radius: 2rem;
+    border: 1px solid black;
+    transition: all .5s ease-in-out;
+}
+input[type="button"]:hover{
+    background-color: #3c2d7c;
+    color: aliceblue;
+    transform: scale(1.05);
+    transition: all .3s ease-in-out;
+}

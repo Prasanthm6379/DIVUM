@@ -1,7 +1,7 @@
 body{
     color: aliceblue;
-    background-color: rgb(38, 105, 250);
-    background-image: url(Background.jpg);
+    background-color: blueviolet;
+    background-image: url(/Frontend/assets/images/Background.jpg);
 }
 
 .bar {
@@ -27,6 +27,7 @@ body{
 .back:hover {
     background-color: rgb(60, 45, 124);
     color: aliceblue;
+    border: 1px solid blacks;
 }
 
 
@@ -49,7 +50,7 @@ body{
     color: black;
 }
 .form{
-    background-image: url(Form.jpg);
+    background-image: url(/Frontend/assets/images/Form.jpg);
     display: flex;
     background-color: aliceblue;
     /* width: 40%; */
@@ -98,6 +99,8 @@ input[type="submit"]{
 }
 
 .fname-err, .lname-err, .email-err{
+    margin: 0;
+    padding: 0;
     text-align: right;
     color:red;
     display: none;
@@ -108,3 +111,50 @@ input[type="submit"]{
 .back-button{
     width: 50%;
 }
+.popup {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    display: none; 
+    position: fixed; 
+    z-index: 1; 
+    padding-top: 100px; 
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%; 
+    background-color: rgba(0,0,0,0.4); 
+  }
+  .popup-content {
+    border-radius: 1rem;
+    background-color:blueviolet;
+    color: whitesmoke;
+    font-size: 20px;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+  }
+
+.alert {
+    display: none;
+    margin-top: 5rem;
+    position: absolute;
+    padding: 20px;
+    background-color: #f44336;
+    color: white;
+    height: 30px;
+  }
+  
+  .closebtn {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  .closebtn:hover {
+    color: black;
+  }

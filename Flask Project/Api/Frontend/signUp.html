@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="./assets/css/signup.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link rel="icon" href="./assets/images/favicon.svg">
+</head>
+
+<body>
+    <div class="popup" id="popup" onclick="location.href='login.html'">
+        <p class="popup-content" id="popup-content"><span>User created Sucessfully, Click anywhere to continue!</span></p>
+    </div>
+    <div class="alert" id="alert">
+        <span id="err-txt"></span>
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+    </div>
+    <div class="form-body">
+        <table class="sign-up-table">
+            <tr>
+                <td colspan="2">
+                    <h1>SIGN UP</h1>
+                </td>
+            </tr>
+            <form onsubmit="return signup()" autocomplete="off">
+                <tr>
+                    <td>
+                        <label for="username">USER NAME </label>
+                    </td>
+                    <td>
+                        <input type="text" name="username" id="uname">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="pass">PASSWORD </label>
+                    </td>
+                    <td>
+                        <input type="password" name="pass" id="pass">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="cpass">CONFIRM PASSWORD </label>
+                    </td>
+                    <td>
+                        <input type="password" name="cpass" id="cpass">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input type="submit" value="CREATE USER">
+                        <input type="button" value="GO BACK" onclick="location.href='login.html'">
+                    </td>
+                </tr>
+            </form>
+        </table>
+    </div>
+    <script src="./assets/js/signup.js"></script>
+</body>
+
+</html>

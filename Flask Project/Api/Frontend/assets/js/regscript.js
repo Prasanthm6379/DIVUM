@@ -11,6 +11,7 @@ function loader() {
         document.getElementById('address').value = sessionStorage.getItem('address')
         document.getElementById('dateOfBirth').value = sessionStorage.getItem('dob')
         document.getElementById('email').setAttribute('disabled', true)
+        document.getElementById('popup-content').innerHTML = "Details edited Sucessfully, Click anywhere to continue!"
         const today = new Date().toISOString().split('T')[0];
         document.getElementById('dateOfBirth').setAttribute('max', String(today))
         getmails()
@@ -21,6 +22,33 @@ function loader() {
     }
 }
 
+async function addDetail(data) {
+    if (data) {
+        const response = await fetch('http://localhost:5000/details', {
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: {
+                'Content-type': 'application/json',
+            },
+        })
+    } else {
+        const response = await fetch('http://localhost:5000/details', {
+            method: 'POST',
+            body: JSON.stringify({
+                firstName: document.getElementById('firstName').value,
+                lastName: document.getElementById('lastName').value,
+                mobile: document.getElementById('mobile').value,
+                email: document.getElementById('email').value,
+                dateOfBirth: document.getElementById('dateOfBirth').value,
+                address: document.getElementById('address').value,
+            }),
+            headers: {
+                'Content-type': 'application/json',
+            },
+        })
+    }
+}
+
 
 async function getmails() {
 
@@ -28,9 +56,7 @@ async function getmails() {
     const data = await resp.json()
     data.map((m) => {
         mails.push(m['email'][0])
-        ms+=","+m['email'][0]
     })
-    ms=ms.split(',')
 }
 
 function checkmail(data, mail) {
@@ -44,13 +70,9 @@ function checkmail(data, mail) {
 
     } else {
         getmails()
-        const em = []
-        mails.map((m) => {
-            em.push(m);
-        })
         let email = document.getElementById('email').value;
-        for (let i = 0; i < em.length; i++) {
-            if (email == em[i]) {
+        for (let i = 0; i < mails.length; i++) {
+            if (email == mails[i]) {
                 document.getElementById('email-exist').style.display = 'block'
                 mailFlag = true
                 return true
@@ -64,13 +86,13 @@ function checkmail(data, mail) {
 
 function mail(mail) {
     if (mail) {
-        if (/^[a-z]+[0-9._-]+@[a-z.-]+\.[a-z]{2,63}$/.test(mail) || /^[a-z]+@[a-z.-]+\.[a-z]{2,63}$/.test(mail)) {
+        if (/^[a-z,A-Z,0-9._-]+@[a-z.-]+\.[a-z]{2,63}$/.test(mail)) {
             return true
         } else {
             return false
         }
     } else {
-        if (/^[a-z]+[0-9._-]+@[a-z.-]+\.[a-z]{2,63}$/.test(document.getElementById('email').value) || /^[a-z]+@[a-z.-]+\.[a-z]{2,63}$/.test(document.getElementById('email').value)) {
+        if (/^[a-z,A-Z,0-9._-]+@[a-z.-]+\.[a-z]{2,63}$/.test(document.getElementById('email').value)) {
             document.getElementById('email-err').style.display = "none"
             return true
         } else {
@@ -132,65 +154,17 @@ function lname(name) {
         }
     }
 }
-function check() {
-    if (document.getElementById('firstName').value == "") {
-        alert("Please fill in first name")
-        return false
-    } else if (document.getElementById('email').value == "") {
-        alert("Please fill in email")
-        return false
-    } else if (document.getElementById('mobile').value == "") {
-        alert("Please fill in mobile number")
-        return false
-    } else if (document.getElementById('address').value == "") {
-        alert("Please fill in address")
-        return false
-    } else if (document.getElementById('dateOfBirth').value == "") {
-        alert("Please select a date")
-        return false
-    } else if (fname() || lname()) {
-        alert("Please check first or last name")
-        return false
-    }
 
-
-    if (sessionStorage.getItem('key') == 'register') {
-        if (mail()) {
-            getmails()
-            if (mailFlag) {
-                return false
-            } else {
-                addDetail()
-            }
-        } else {
-            return false
-        }
-    } else {
-        editDetail()
-        return true
-    }
-}
-
-
-const editDetail = async () => {
+async function editDetail(data) {
     const response = await fetch('http://localhost:5000/details', {
         method: 'PUT',
-        body: JSON.stringify({
-            firstName: document.getElementById('firstName').value,
-            lastName: document.getElementById('lastName').value,
-            mobile: document.getElementById('mobile').value,
-            email: document.getElementById('email').value,
-            dateOfBirth: document.getElementById('dateOfBirth').value,
-            address: document.getElementById('address').value,
-            key: sessionStorage.getItem('email')
-        }),
+        body: JSON.stringify(data),
         headers: {
             'Content-type': 'application/json',
         },
     })
-    console.log(response);
+    return true
 }
-
 
 
 function mobileCheck(mob) {
@@ -210,34 +184,90 @@ function mobileCheck(mob) {
 
 
 
+function check() {
+    let alertbox = document.getElementById('alert')
+    let alert = document.getElementById('err-txt')
+    if (document.getElementById('firstName').value == "") {
+        alertbox.style.display = 'block'
+        alert.innerHTML = "Please fill in First name "
+        return false
+    } else if (document.getElementById('lastName').value == "") {
+        alertbox.style.display = 'block'
+        alert.innerHTML = "Please fill in Last name "
+        return false
+    } else if (document.getElementById('email').value == "") {
+        alertbox.style.display = 'block'
+        alert.innerHTML = "Please fill in Email"
+        return false
+    } else if (document.getElementById('mobile').value == "") {
+        alertbox.style.display = 'block'
+        alert.innerHTML = "Please fill in Mobile number"
+        return false
+    } else if (document.getElementById('address').value == "") {
+        alertbox.style.display = 'block'
+        alert.innerHTML = "Please fill in Address"
+        return false
+    } else if (document.getElementById('dateOfBirth').value == "") {
+        alertbox.style.display = 'block'
+        alert.innerHTML = "Please enter a valid date"
+        return false
+    } else if (fname() || lname()) {
+        alertbox.style.display = 'block'
+        alert.innerHTML = "Enter only alphabets in Firstname and Lastname"
+        return false
+    } else if (document.getElementById('mobile').value.length != 10) {
+        alertbox.style.display = 'block'
+        alert.innerHTML = "Enter a valid 10 digit mobile number"
+        return false
+    }
 
 
-async function addDetail(data) {
-    if (data) {
-        const response = await fetch('http://localhost:5000/details', {
-            method: 'POST',
-            body: JSON.stringify(data),
-            headers: {
-                'Content-type': 'application/json',
-            },
-        })
+    if (sessionStorage.getItem('key') == 'register') {
+        if (mail()) {
+            getmails()
+            if (mailFlag) {
+                return false
+            } else {
+                addDetail()
+                document.getElementById('alert').style.display = "none"
+
+                document.getElementById('popup').style.display = 'block'
+                return false
+            }
+        } else {
+            return false
+        }
     } else {
-        const response = await fetch('http://localhost:5000/details', {
-            method: 'POST',
-            body: JSON.stringify({
-                firstName: document.getElementById('firstName').value,
-                lastName: document.getElementById('lastName').value,
-                mobile: document.getElementById('mobile').value,
-                email: document.getElementById('email').value,
-                dateOfBirth: document.getElementById('dateOfBirth').value,
-                address: document.getElementById('address').value,
-            }),
-            headers: {
-                'Content-type': 'application/json',
-            },
-        })
+        console.log("edit");
+        let data = {
+            firstName: document.getElementById('firstName').value,
+            lastName: document.getElementById('lastName').value,
+            mobile: document.getElementById('mobile').value,
+            email: document.getElementById('email').value,
+            dateOfBirth: document.getElementById('dateOfBirth').value,
+            address: document.getElementById('address').value,
+            key: sessionStorage.getItem('email')
+        }
+        editDetail(data)
+        document.getElementById('alert').style.display="none"
+        document.getElementById('popup').style.display = 'block'
+        return false
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 try {
@@ -248,6 +278,7 @@ try {
         mail,
         mobileCheck,
         addDetail,
+        editDetail,
     }
 } catch {
 

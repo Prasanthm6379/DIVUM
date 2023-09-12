@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="icon" href="./assets/images/favicon.svg">
+    <link rel="stylesheet" href="./assets/css/login-style.css">
+</head>
+
+<body>
+    <div class="display">
+        <div class="alert" id="alert">
+            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+            <span id="alert-txt">
+                Invalid Password or check Username
+            </span>
+        </div>
+        <table class="form-table">
+            <tr>
+                <td colspan="2">
+                    <h1>Login Page</h1>
+                </td>
+            </tr>
+            <form onsubmit="return login()" autocomplete="off">
+                <tr>
+                    <td>
+                        <label for="username">USER NAME</label>
+                    </td>
+                    <td>
+                        <input type="text" name="username" id="username">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+
+                        <label for="password">PASSWORD</label>
+                    </td>
+
+                    <td>
+                        <input type="password" name="password" id="password">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input type="submit" value="LOGIN">
+                        <input type="button" value="SIGN UP" onclick="location.href='signUp.html'">
+                    </td>
+                </tr>
+            </form>
+        </table>
+    </div>
+    <script src="./assets/js/login.js"></script>
+</body>
+
+</html>

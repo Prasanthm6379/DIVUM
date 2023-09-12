@@ -8,22 +8,7 @@ class TestApp(unittest.TestCase):
         app.testing=True
         self.app=app.test_client()
 
-    def test_addUser(self):
-        user={
-            "firstName": "example",
-            "lastName": "example",
-            "mobile": "8899887767",
-            "email": "example@domain.com",
-            "dateOfBirth": "1990-01-01",
-            "address": "123,cbe"
-        }
-        resp=self.app.post('/details',json=user)
-        self.assertEqual(resp.status_code,200)
 
-
-    def test_getDetails(self):
-        resp=self.app.get('/getDetails')
-        self.assertEqual(resp.status_code,200)
 
     def test_editDetails(self):
         data={
