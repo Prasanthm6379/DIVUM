@@ -1,5 +1,17 @@
 
-let f = false
+function setCookie(name, value, daysToExpire) {
+    var cookie = name + "=" + encodeURIComponent(value);
+    
+    if (daysToExpire) {
+        var expirationDate = new Date();
+        expirationDate.setDate(expirationDate.getDate() + daysToExpire);
+        cookie += "; expires=" + expirationDate.toUTCString();
+    }
+    
+    document.cookie = cookie;
+}
+
+
 
 function login() {
     var data = {
@@ -17,8 +29,10 @@ function login() {
             document.getElementById('alert').style.display='block'
         }else{
             resp.json().then((result)=>{
-                f=result[0].Result
+                let f=result.Result
                 if(f){
+                    var token = result.access_token;
+                    setCookie('access_token',token,1)
                     location.href='index.html'
                 }
                 else{
@@ -27,9 +41,6 @@ function login() {
             })
         }
     })
-    if(f){
-        return true
-    }else{
-        return false
-    }
+    return false
+
 }

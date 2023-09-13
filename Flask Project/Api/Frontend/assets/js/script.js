@@ -48,10 +48,32 @@ function next() {
 }
 
 
+function getCookie(name) {
+    var cookies = document.cookie.split(';');
+    for (var i = 0; i < cookies.length; i++) {
+        var cookie = cookies[i].trim();
+        if (cookie.startsWith(name + '=')) {
+            return cookie.substring(name.length + 1, cookie.length);
+        }
+    }
+    return null;
+}
 
+function setCookie(name, value, daysToExpire) {
+    var cookie = name + "=" + encodeURIComponent(value);
+    
+    if (daysToExpire) {
+        var expirationDate = new Date();
+        expirationDate.setDate(expirationDate.getDate() + daysToExpire);
+        cookie += "; expires=" + expirationDate.toUTCString();
+    }
+    
+    document.cookie = cookie;
+}
 
 
 // ---------------------------------------------------------------------------------------------------------------------------------------
+
 async function getapi(test) {
     if (test) {
         let url = "http://127.0.0.1:5000/getDetails"
@@ -63,8 +85,13 @@ async function getapi(test) {
         }
         return true
     } else {
+        let token=getCookie('access_token')
         let url = "http://127.0.0.1:5000/getDetails"
-        const response = await fetch(url);
+        const response = await fetch(url,{
+            headers:{
+                'access-token':token
+            }
+        });
         if (response.status == 204) {
             document.getElementById('table-body').innerHTML = `<tr><td colspan='6'>NO DATA IN DATABASE FOR THIS USER</td><tr>`
         } else if (response.status == 200) {
@@ -75,6 +102,11 @@ async function getapi(test) {
             displayPage(data, currentPage);
         }
     }
+}
+
+function signout(){
+    setCookie('access_token',"",1)
+    location.href='login.html'
 }
 
 function register() {
@@ -117,16 +149,46 @@ function deleteDetail(email, test) {
     }
 }
 
+function place(){
+    document.getElementById('search').setAttribute('placeholder',document.getElementById('searchid').value)
+}
+
 function search(name) {
     if(name!=""){
         searchdata=[]
-        for (let i = 0; i < data.length; i++) {
-            if(String(name).toLowerCase()==String(data[i].firstName).toLowerCase()){
-                searchdata.push(data[i])
-            }
+        let option=document.getElementById('searchid').value
+        switch(option){
+            case 'Firstname':
+                for (let i = 0; i < data.length; i++) {
+                    if(String(name).toLowerCase()==String(data[i].firstName).toLowerCase()){
+                        searchdata.push(data[i])
+                    }
+                }
+                break
+            case 'Lastname':
+                for (let i = 0; i < data.length; i++) {
+                    if(String(name).toLowerCase()==String(data[i].lastName).toLowerCase()){
+                        searchdata.push(data[i])
+                    }
+                }
+                break
+            case 'Email':
+                for (let i = 0; i < data.length; i++) {
+                    if(String(name).toLowerCase()==String(data[i].email).toLowerCase()){
+                        searchdata.push(data[i])
+                    }
+                }
+                break
+            case 'Mobile':
+                for (let i = 0; i < data.length; i++) {
+                    if(String(name).toLowerCase()==String(data[i].mobile).toLowerCase()){
+                        searchdata.push(data[i])
+                    }
+                }
+                break
         }
         if(searchdata.length==0){
-            document.getElementById('table-body').innerHTML = `<tr><td colspan='6'>${name} is not in database</td><tr>`
+            document.getElementById('table-body').innerHTML = `<tr><td colspan='6'>${option}: ${name} is not in database</td><tr>`
         }else{
             displayPage(searchdata,currentPage)
         }

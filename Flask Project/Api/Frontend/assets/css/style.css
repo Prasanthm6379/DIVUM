@@ -121,7 +121,7 @@ body {
 .search{
     text-align: center;
 }
-input[type="text"]{
+input[type="text"],select{
     border: none;
     padding: 0.2rem 1rem;
     border-radius: 1rem;
@@ -133,6 +133,7 @@ input[type='button']{
     border: 1px solid black;
     transition: all .5s ease-in-out;
 }
+
 input[type="button"]:hover{
     background-color: #3c2d7c;
     color: aliceblue;

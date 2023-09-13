@@ -15,13 +15,19 @@
             <img src="./assets/images/Divum_Logo.svg" class="logo" alt="logo" title="logo">
         </div>
         <div style="padding: 2rem 2rem;">
-            <button class="signout-button" onclick="location.href='login.html'">SIGN OUT</button>&nbsp
+            <button class="signout-button" onclick="signout()">SIGN OUT</button>&nbsp
             <button class="add-button" onclick="register()">ADD</button>
         </div>
     </div>
     <div>
         <h1 class="head">USER DETAILS</h1>
         <div class="search">
+            <select name="searchid" id="searchid" onchange="place()">
+                <option value="Firstname">Firstname</option>
+                <option value="Lastname">Lastname</option>
+                <option value="Email">email</option>
+                <option value="Mobile">mobile</option>
+            </select>
             <input type="text" name="search" id="search" placeholder="Firstname" autocomplete="off">
             <input type="button" value="SEARCH" onclick="search(document.getElementById('search').value)">
             <input type="button" value="RESET" onclick="displayPage(data,currentPage)">

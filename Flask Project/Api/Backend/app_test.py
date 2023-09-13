@@ -8,7 +8,23 @@ class TestApp(unittest.TestCase):
         app.testing=True
         self.app=app.test_client()
 
+    def test_validLogin(self):
+        data={
+            'username':'user',
+            "pass":"pass"
+        }
+        resp=self.app.post('/login',json=data)
+        self.assertEqual(resp.json[0]['Result'],True)
 
+    def test_invalidLogin(self):
+        data={
+            'username':'user',
+            "pass":"pass123"
+        }
+        resp=self.app.post('/login',json=data)
+        self.assertEqual(resp.json[0]['Result'],False)
+    
+    
 
     def test_editDetails(self):
         data={
