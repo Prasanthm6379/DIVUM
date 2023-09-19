@@ -10,7 +10,7 @@
 </head>
 
 <body onload="loader()">
-    <div class="popup" id="popup" onclick="location.href='index.html'">
+    <div class="popup" id="popup" onclick="location.href='login.html'">
         <p class="popup-content" id="popup-content">Details added Sucessfully, Click anywhere to continue!
         </p>
     </div>
@@ -56,9 +56,10 @@
 
                     <div>
                         <label for="mob">MOBILE *</label>
-                        <input type="number" inputmode="numeric" name="mob" id="mobile" pattern="[0-9]{10}"
+                        <input type="number" inputmode="numeric" name="mob" id="mobile" pattern="[6-9]{10}"
                             max=10000000000 placeholder="Mobile Number" maxlength="10" oninput="mobileCheck()"
                             title="Enter a 10 digit mobile number">
+                        <p id="mob-err" class="mob-err"></p>
                     </div>
                     <div>
                         <label for="address">ADDRESS *</label>

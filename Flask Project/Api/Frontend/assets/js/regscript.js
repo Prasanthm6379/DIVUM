@@ -3,8 +3,16 @@ var mailFlag = true
 
 
 function getCookie() {
-    var cookies = document.cookie;
-    return(cookies.slice(13));
+    var cookies = document.cookie.split(';')
+    for(let i=0;i<cookies.length;i++){
+        let cookie=cookies[i]
+        if(cookie.startsWith(" access")){
+            cookie=cookie.slice(1)
+        }
+        if(cookie.startsWith('access_token=')){
+            return cookie.slice(13)
+        }
+    }
 }
 
 function loader() {
@@ -173,9 +181,19 @@ function mobileCheck(mob) {
         }
     } else {
         let num = document.getElementById('mobile').value
-        if (num > 9999999999) {
-            num = ("" + num).substring(0, 10);
-            document.getElementById('mobile').value = num
+        if (num<6){
+            document.getElementById('mob-err').innerHTML="Enter a valid mobile number"
+            document.getElementById('mob-err').style.display='block'
+            document.getElementById('mobile').value = ''
+        }else{
+            if (num > 9999999999) {
+                num = ("" + num).substring(0, 10);
+                document.getElementById('mob-err').innerHTML="Mobile number cannot exceed 10 digits"
+                document.getElementById('mob-err').style.display='block'
+                document.getElementById('mobile').value = num
+            }else{
+                document.getElementById('mob-err').style.display='none'
+            }
         }
     }
 }
