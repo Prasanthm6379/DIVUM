@@ -1,6 +1,6 @@
 body {
     background-color: rgb(38, 105, 250);
-    background-image: url(/Frontend/assets/images/Background.jpg);
+    background-image: url(../images/Background.jpg);
 }
 .head{
     text-align: center;

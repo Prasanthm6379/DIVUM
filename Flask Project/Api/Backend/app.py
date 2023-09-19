@@ -6,9 +6,7 @@ import bcrypt
 import os
 from functools import wraps
 import jwt
-# import basic_auth_middleware
-# from auth_middleware import token_required
-# @token_required
+
 app = Flask(__name__)
 CORS(app, origins="*")
 con = psy.connect(
@@ -27,11 +25,11 @@ def token_required(f):
     @wraps(f)
     def decorated(*args, **kwargs):
         token = None
-        if 'test' in request.headers:
+        token = request.headers['access-token']
+        if 'test' in request.headers and token:
             return f('user',*args,**kwargs)
         else:
-            if 'access-token' in request.headers:
-                token = request.headers['access-token']
+            # if 'access-token' in request.headers:
             if not token:
                 return jsonify({"message": "Token is invald!"}), 401
             try:
@@ -83,16 +81,19 @@ def login():
         cursor.execute('select pass from login where username=%s', [
                        data['username']])
         user = cursor.fetchall()
+        if(len(user)==0):
+            return jsonify({"Result":"User not found"}),404
         userpwd = user[0][0].encode('utf8')
         res = bcrypt.checkpw(userbyte, userpwd)
-        global currentUser
-        currentUser = data['username']
-        token=tokenGen(currentUser)
+        if(not res):
+            return jsonify({"Result":res,'error':'Incorrect password'})
+        token=tokenGen(data['username'])
         response=make_response(jsonify({"Result":res,'access_token':token}))
         response.set_cookie('access_token',token,httponly=False)
         return response
     except Exception as e:
-        return jsonify({"Result": False}), 404
+        return jsonify({"Result": False,
+                        'error':e}), 404
 
 
 @app.route('/getone/<mail>', methods=['GET'])

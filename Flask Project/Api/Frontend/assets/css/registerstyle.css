@@ -1,7 +1,7 @@
 body{
     color: aliceblue;
     background-color: blueviolet;
-    background-image: url(/Frontend/assets/images/Background.jpg);
+    background-image: url(../images/Background.jpg);
 }
 
 .bar {
@@ -15,14 +15,13 @@ body{
 }
 
 
-.back{
+.back ,input[type='button']{
     cursor: pointer;
     padding: 1rem 2rem 1rem 2rem;
     border-radius: 2rem;
     font-size: 18px;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    border-style: none;
-    background-color: antiquewhite;
+    border: 1px solid black;
+    transition: all .5s ease-in-out;
 }
 .back:hover {
     background-color: rgb(60, 45, 124);
@@ -50,7 +49,7 @@ body{
     color: black;
 }
 .form{
-    background-image: url(/Frontend/assets/images/Form.jpg);
+    background-image: url(../images/Form.jpg);
     display: flex;
     background-color: aliceblue;
     
@@ -99,7 +98,7 @@ input[type="submit"]{
     width: 50%;
 }
 
-.fname-err, .lname-err, .email-err{
+.fname-err, .lname-err, .email-err ,.mob-err{
     margin: 0;
     padding: 0;
     text-align: right;

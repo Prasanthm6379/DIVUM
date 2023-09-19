@@ -48,19 +48,21 @@ function next() {
 }
 
 
-function getCookie(name) {
-    var cookies = document.cookie;
-    return(cookies.slice(13));
+function getCookie() {
+    var cookies = document.cookie.split(';')
+    for(let i=0;i<cookies.length;i++){
+        let cookie=cookies[i]
+        if(cookie.startsWith(" access")){
+            cookie=cookie.slice(1)
+        }
+        if(cookie.startsWith('access_token=')){
+            return cookie.slice(13)
+        }
+    }
 }
 
 function setCookie(name, value, daysToExpire) {
     var cookie = name + "=" + encodeURIComponent(value);
-    
-    if (daysToExpire) {
-        var expirationDate = new Date();
-        expirationDate.setDate(expirationDate.getDate() + daysToExpire);
-        cookie += "; expires=" + expirationDate.toUTCString();
-    }
     
     document.cookie = cookie;
 }
@@ -103,7 +105,7 @@ async function getapi(test) {
 }
 
 function signout(){
-    setCookie('access_token',"",1)
+    setCookie('access_token',"")
     location.href='login.html'
 }
 

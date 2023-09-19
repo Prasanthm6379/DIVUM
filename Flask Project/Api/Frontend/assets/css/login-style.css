@@ -12,6 +12,13 @@ body{
     margin: auto;
     text-align: center;
 }
+.pass-error{
+    margin: 0;
+    padding: 0;
+    text-align: right;
+    color:red;
+    display: none;
+}
 input[type=text],input[type=password]{
     width: 100%;
     padding: 10px;
@@ -28,7 +35,7 @@ input[type=button],input[type=submit],input[type=reset]{
     border-radius: 1rem;
     padding: 10px 15px 10px 15px;
     border: none;
-    /* border:1px solid black; */
+    transition: all .5s ease-in-out;
     margin: 2px;
 }
 .display{
