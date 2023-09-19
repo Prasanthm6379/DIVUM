@@ -30,7 +30,7 @@ input[type=button]:hover,input[type=submit]:hover{
 .sign-up-table{
     border: 1px solid black;
     border-radius: 2rem;
-    background-color: #735ae0;
+    background-image: linear-gradient(45deg, #010d96, #5834b8, #8e5cda, #c186fd);
     padding: 4rem 3rem 4rem 3rem;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     justify-content: center;
