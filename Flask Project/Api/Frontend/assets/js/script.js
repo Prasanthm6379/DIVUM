@@ -49,14 +49,8 @@ function next() {
 
 
 function getCookie(name) {
-    var cookies = document.cookie.split(';');
-    for (var i = 0; i < cookies.length; i++) {
-        var cookie = cookies[i].trim();
-        if (cookie.startsWith(name + '=')) {
-            return cookie.substring(name.length + 1, cookie.length);
-        }
-    }
-    return null;
+    var cookies = document.cookie;
+    return(cookies.slice(13));
 }
 
 function setCookie(name, value, daysToExpire) {
@@ -86,6 +80,10 @@ async function getapi(test) {
         return true
     } else {
         let token=getCookie('access_token')
+        if(!token){
+            document.getElementById('popup').style.display="block"
+            return true
+        }
         let url = "http://127.0.0.1:5000/getDetails"
         const response = await fetch(url,{
             headers:{
@@ -140,9 +138,13 @@ function deleteDetail(email, test) {
         return true
     }
     if (confirm("Are you sure ?")) {
+        let token=getCookie('access_token')
         const url = "http://localhost:5000/delete/" + email
         fetch(url, {
             method: 'DELETE',
+            headers:{
+                'access-token':token
+            }
         });
         location.reload()
         return true

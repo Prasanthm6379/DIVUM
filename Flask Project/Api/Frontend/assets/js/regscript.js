@@ -1,7 +1,18 @@
 var mails = Array()
 var mailFlag = true
 
+
+function getCookie() {
+    var cookies = document.cookie;
+    return(cookies.slice(13));
+}
+
 function loader() {
+    token=getCookie()
+    if(!token){
+        document.getElementById('popup-content').innerHTML="Request timed out, Click anywhere to return to login"
+        document.getElementById('popup').style.display="block"
+    }
     if (sessionStorage.getItem('key') == 'edit') {
         document.getElementById('txt').innerHTML = 'EDIT DETAILS'
         document.getElementById('firstName').value = sessionStorage.getItem('fname')
@@ -23,30 +34,15 @@ function loader() {
 }
 
 async function addDetail(data) {
-    if (data) {
+        let token=getCookie()
         const response = await fetch('http://localhost:5000/details', {
             method: 'POST',
             body: JSON.stringify(data),
             headers: {
                 'Content-type': 'application/json',
+                'access-token':token,
             },
         })
-    } else {
-        const response = await fetch('http://localhost:5000/details', {
-            method: 'POST',
-            body: JSON.stringify({
-                firstName: document.getElementById('firstName').value,
-                lastName: document.getElementById('lastName').value,
-                mobile: document.getElementById('mobile').value,
-                email: document.getElementById('email').value,
-                dateOfBirth: document.getElementById('dateOfBirth').value,
-                address: document.getElementById('address').value,
-            }),
-            headers: {
-                'Content-type': 'application/json',
-            },
-        })
-    }
 }
 
 
@@ -156,11 +152,13 @@ function lname(name) {
 }
 
 async function editDetail(data) {
+    let token=getCookie()
     const response = await fetch('http://localhost:5000/details', {
         method: 'PUT',
         body: JSON.stringify(data),
         headers: {
             'Content-type': 'application/json',
+            'access-token':token,
         },
     })
     return true
@@ -228,9 +226,16 @@ function check() {
             if (mailFlag) {
                 return false
             } else {
-                addDetail()
+                let data={
+                    firstName: document.getElementById('firstName').value,
+                    lastName: document.getElementById('lastName').value,
+                    mobile: document.getElementById('mobile').value,
+                    email: document.getElementById('email').value,
+                    dateOfBirth: document.getElementById('dateOfBirth').value,
+                    address: document.getElementById('address').value,
+                }
+                addDetail(data)
                 document.getElementById('alert').style.display = "none"
-
                 document.getElementById('popup').style.display = 'block'
                 return false
             }

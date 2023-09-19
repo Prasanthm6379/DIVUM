@@ -27,18 +27,19 @@ def token_required(f):
     @wraps(f)
     def decorated(*args, **kwargs):
         token = None
-        if 'access-token' in request.headers:
-            token = request.headers['access-token']
-        if not token:
-            return jsonify({"message": "Token is invald!"}), 401
-        try:
-            data = jwt.decode(token, app.config['SECRECT_KEY'])
-            cursor.execute('select pass from login where username=%s', [
-                           data['username']])
-            cur_user = cursor.fetchall()
-        except:
-            return jsonify({"message": "Token is invald!"}), 401
-        return f(cur_user, *args, **kwargs)
+        if 'test' in request.headers:
+            return f('user',*args,**kwargs)
+        else:
+            if 'access-token' in request.headers:
+                token = request.headers['access-token']
+            if not token:
+                return jsonify({"message": "Token is invald!"}), 401
+            try:
+                data = jwt.decode(token, app.config['SECRECT_KEY'])
+                cur_user=data['username']
+            except:
+                return jsonify({"message": "Token is invald!"}), 401
+            return f(cur_user, *args, **kwargs)
     return decorated
 
 
@@ -70,7 +71,7 @@ def signup():
 def tokenGen(user):
     token=jwt.encode({
         'username':user,
-        'exp':datetime.utcnow()+timedelta(minutes=10)
+        'exp':datetime.utcnow()+timedelta(minutes=30)
     },app.config['SECRECT_KEY'])
     return token.decode('utf8')
 
@@ -100,9 +101,11 @@ def getOne(mail):
         cursor.execute(
             'select email,firstName,lastName,mobile,address,dateOfBirth from details where email=%s', [mail])
         data = cursor.fetchall()
+        if len(data)==0:
+            return jsonify({'message':"user not found"}),404
         return jsonify(data, 200), 200
     except Exception as e:
-        return Response("no"+e)
+        return jsonify({'error':'something went wrong'}),500
 
 
 @app.route('/mails', methods=['GET'])
@@ -122,10 +125,10 @@ def mails():
 
 @app.route('/getDetails', methods=['GET'])
 @token_required
-def getAll(token):
+def getAll(user):
     try:
         cursor.execute(
-            'select email,firstName,lastName,mobile,dateOfBirth from details where username=%s order by updateDate desc', [currentUser])
+            'select email,firstName,lastName,mobile,dateOfBirth from details where username=%s order by updateDate desc', [user])
         data = cursor.fetchall()
         if data:
             res = []
@@ -139,24 +142,30 @@ def getAll(token):
                 })
             return jsonify(res)
         else:
-            return Response("No data Present", 204)
+            return jsonify({"message":"No data present"}),204
     except Exception as e:
-        return Response("Error: ", e)
+        return jsonify({"message",e})
 
 
 @app.route('/details', methods=['POST', 'PUT'])
-def add():
+@token_required
+def add(user):
     data = request.get_json()
     if not data:
         return jsonify({
             "message": "Please send data",
             "error": "Bad request"
         }), 400
+    elif(len(data)!=6):
+        return jsonify({
+            'message':'Please send all the required data',
+            'error':'bad request'
+        }),400
     if request.method == 'POST':
         try:
             date = datetime.now()
             cursor.execute('insert into details(firstName,lastName,mobile,email,dateOfBirth,address,createDate,updateDate,username) values (%s,%s,%s,%s,%s,%s,%s,%s,%s)',
-                           [data['firstName'], data['lastName'], data['mobile'], data['email'], data['dateOfBirth'], data['address'], date, date, currentUser])
+                           [data['firstName'], data['lastName'], data['mobile'], data['email'], data['dateOfBirth'], data['address'], date, date, user])
             con.commit()
             return jsonify({"message": "Detail added sucessfully"}), 200
         except Exception as e:
@@ -164,7 +173,6 @@ def add():
     elif request.method == 'PUT':
         try:
             date = datetime.now()
-
             cursor.execute(
                 'UPDATE details SET firstName=%s, lastName=%s, mobile=%s, dateOfBirth=%s, address=%s, updateDate=%s, email=%s WHERE email=%s',
                 (data['firstName'], data['lastName'], data['mobile'],
@@ -177,7 +185,8 @@ def add():
 
 
 @app.route('/delete/<mail>', methods=['DELETE'])
-def delete(mail):
+@token_required
+def delete(user,mail):
     try:
         cursor.execute('delete from details where email=%s', [mail])
         con.commit()

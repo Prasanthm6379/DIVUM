@@ -10,6 +10,10 @@
 </head>
 
 <body onload="getapi()">
+    <div class="popup" id="popup" onclick="location.href='login.html'">
+        <p class="popup-content" id="popup-content"><span>Unauthorized Access,Click anywhere to reurn to login</span>
+        </p>
+    </div>
     <div class="bar">
         <div>
             <img src="./assets/images/Divum_Logo.svg" class="logo" alt="logo" title="logo">
@@ -20,6 +24,7 @@
         </div>
     </div>
     <div>
+        
         <h1 class="head">USER DETAILS</h1>
         <div class="search">
             <select name="searchid" id="searchid" onchange="place()">

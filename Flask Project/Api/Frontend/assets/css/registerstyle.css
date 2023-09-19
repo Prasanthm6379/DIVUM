@@ -53,6 +53,7 @@ body{
     background-image: url(/Frontend/assets/images/Form.jpg);
     display: flex;
     background-color: aliceblue;
+    
     /* width: 40%; */
     height:fit-content;
     border-radius: 1rem;
