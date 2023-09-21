@@ -9,7 +9,7 @@ body{
     color: aliceblue;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
-input[type=text],input[type=password]{
+input[type=text],input[type=password],input[type=email]{
     width: 100%;
     padding: 10px;
     border-radius: 5px;
