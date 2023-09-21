@@ -6,6 +6,8 @@ import bcrypt
 import os
 from functools import wraps
 import jwt
+from flask_mail import Mail, Message
+import secrets
 
 app = Flask(__name__)
 CORS(app, origins="*")
@@ -29,7 +31,7 @@ def token_required(f):
         if 'test' in request.headers and token:
             return f('user',*args,**kwargs)
         else:
-            # if 'access-token' in request.headers:
+
             if not token:
                 return jsonify({"message": "Token is invald!"}), 401
             try:
@@ -41,10 +43,69 @@ def token_required(f):
     return decorated
 
 
+
+
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'  
+app.config['MAIL_PORT'] = 587  
+app.config['MAIL_USERNAME'] = 'prasanthbike@gmail.com'  
+app.config['MAIL_PASSWORD'] = 'fbmcvxjhdaufjovl'  
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USE_SSL'] = False
+mail = Mail(app)
+
+
+def send_verification_email(email,username, token):
+    with app.app_context():
+        msg = Message('Email Verification', sender='your_email@example.com', recipients=[email])
+        verification_url = f'http://localhost:5000/verify/{token}'  
+        msg.html = f'To verify your email: <a href="{verification_url}">Click here</a><p>Valid only for 30 minutes!</p><p><a href="http://localhost:5000/resend/{username}">Click here</a> to resend email to return to login</p>'
+        mail.send(msg)
+
+
 @app.route('/')
 def home():
     return "<h1 style='text-align:center;'>Welcome to Divum API<h1>"
 
+@app.route('/verify/<token>',methods=['GET'])
+def mail_verify(token):
+    try:
+        data = jwt.decode(token, app.config['SECRECT_KEY'])
+    except Exception:
+        return''''
+        <div style='text-align:center'>
+        <h1>Request timed out</h1>
+        </div>'''
+    username=data['username']
+    cursor.execute('select verify from login where username=%s',[username])
+    status=cursor.fetchone()[0]
+    print(username)
+    print(status)
+    if status=='true':
+        return ''''
+        <div style='text-align:center'>
+        <h1>Email already verified</h1>
+        <p>click <a href='http://127.0.0.1:5500/Flask%20Project/Api/Frontend/login.html'>here</a> to return to login</p>
+        </div>'''
+    else:
+        cursor.execute('update login set verify=%s where username=%s',[True,username])
+        con.commit()
+        return ''''
+        <div style='text-align:center'>
+        <h1>Email verified sucessfuly!</h1>
+        <p>click <a href='http://127.0.0.1:5500/Flask%20Project/Api/Frontend/login.html'>here</a> to return to login</p>
+        </div>'''
+
+@app.route('/resend/<username>',methods=['GET'])
+def resend_mail(username):
+    cursor.execute('select mail,verify from login where username=%s',[username])
+    data=cursor.fetchone()
+    email=data[0]
+    status=data[1]
+    if status=='true':
+        return '''<div style='text-align:center'><h3>Email already verified</h3></div>'''
+    token=tokenGen(username)
+    send_verification_email(email,username,token)
+    return '''<div style='text-align:center'><h3>Verification link sent to registered mail</h3></div>'''
 
 @app.route('/signup', methods=['POST'])
 def signup():
@@ -53,13 +114,16 @@ def signup():
         byte = data['pass'].encode('utf8')
         salt = bcrypt.gensalt(12)
         hashpwd = bcrypt.hashpw(byte, salt)
+        token=tokenGen(data['username'])
         try:
-            cursor.execute('insert into login (username,pass) values (%s,%s)', [
-                           data['username'], hashpwd.decode('utf8')])
+            cursor.execute('insert into login (username,pass,mail,verify) values (%s,%s,%s,%s)', [
+                           data['username'], hashpwd.decode('utf8'),data['email'],False])
+            con.commit()
         except Exception as e:
             con.rollback()
             return jsonify({"message": "User already exists"}), 409
         con.commit()
+        send_verification_email(data['email'],data['username'],token)
         return Response("Sucess", 200)
     except Exception as e:
         return Response("User already exist", 204)
@@ -78,6 +142,10 @@ def login():
     try:
         data = request.get_json()
         userbyte = data['pass'].encode('utf8')
+        cursor.execute('select verify from login where username=%s',[data['username']])
+        status=cursor.fetchone()[0]
+        if status=='false':
+            return jsonify({"Result":"Please verify email!"}),401
         cursor.execute('select pass from login where username=%s', [
                        data['username']])
         user = cursor.fetchall()
@@ -143,9 +211,9 @@ def getAll(user):
                 })
             return jsonify(res)
         else:
-            return jsonify({"message":"No data present"}),204
+            return jsonify({"message":"No data present","user":user}),204
     except Exception as e:
-        return jsonify({"message",e})
+        return jsonify({"message",e}),500
 
 
 @app.route('/details', methods=['POST', 'PUT'])

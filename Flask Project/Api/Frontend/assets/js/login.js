@@ -35,6 +35,12 @@ function login() {
                 document.getElementById('alert').style.display = 'block'
                 document.getElementById('pass-error').style.display = 'none'
             })
+        }else if(resp.status==401){
+            resp.json().then((result) => {
+                document.getElementById('alert-txt').innerHTML = result.Result
+                document.getElementById('alert').style.display = 'block'
+                document.getElementById('pass-error').style.display = 'none'
+            })
         } else {
             resp.json().then((result) => {
                 let f = result.Result

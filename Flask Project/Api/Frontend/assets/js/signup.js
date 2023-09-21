@@ -23,6 +23,7 @@ function signup() {
     let uname = document.getElementById('uname').value
     let password = document.getElementById('pass').value
     let cpass = document.getElementById('cpass').value
+    let mail = document.getElementById('email').value
     if(uname==""){
         document.getElementById('err-txt').innerHTML="Fill in Username!"
         document.getElementById('alert').style.display="block"
@@ -35,11 +36,21 @@ function signup() {
         document.getElementById('err-txt').innerHTML="Fill in confirm password!"
         document.getElementById('alert').style.display="block"
         return false
+    }else if(mail==""){
+        document.getElementById('err-txt').innerHTML="Fill in Email!"
+        document.getElementById('alert').style.display="block"
+        return false
+    }else if(!(/^[a-z,A-Z,0-9._-]+@[a-z.-]+\.[a-z]{2,63}$/.test(mail))){
+        console.log("invalid");
+        document.getElementById('err-txt').innerHTML="Please enter a valid email!"
+        document.getElementById('alert').style.display="block"
+        return false
     }
     if (password === cpass) {
         data = {
             username: uname,
-            pass: password
+            pass: password,
+            email:mail
         }
         addUser(data)
         return false
