@@ -7,7 +7,6 @@ import os
 from functools import wraps
 import jwt
 from flask_mail import Mail, Message
-import secrets
 
 app = Flask(__name__)
 CORS(app, origins="*")
