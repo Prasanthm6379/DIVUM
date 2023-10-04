@@ -9,7 +9,7 @@ async function addUser(data) {
             'Content-type': 'application/json',
         },
     })
-    if(rep.status==409){
+    if(rep.status==226){
         document.getElementById('err-txt').innerHTML="User already exists!"
         document.getElementById('alert').style.display="block"
     }else{

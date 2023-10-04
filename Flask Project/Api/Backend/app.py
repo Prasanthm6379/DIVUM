@@ -7,6 +7,7 @@ import os
 from functools import wraps
 import jwt
 from flask_mail import Mail, Message
+from threading import Thread
 
 app = Flask(__name__)
 CORS(app, origins="*")
@@ -54,10 +55,11 @@ mail = Mail(app)
 
 
 def send_verification_email(email,username, token):
+    # print("email sent")
     with app.app_context():
-        msg = Message('Email Verification', sender='your_email@example.com', recipients=[email])
+        msg = Message('Email Verification', sender='app_test@gmail.com', recipients=[email])
         verification_url = f'http://localhost:5000/verify/{token}'  
-        msg.html = f'To verify your email: <a href="{verification_url}">Click here</a><p>Valid only for 30 minutes!</p><p><a href="http://localhost:5000/resend/{username}">Click here</a> to resend email to return to login</p>'
+        msg.html = f'<p>Hi {username}!</p>To verify your email: <a href="{verification_url}">Click here</a><p>Valid only for 30 minutes!</p><p><a href="http://localhost:5000/resend/{username}">Click here</a> to resend email to return to login</p>'
         mail.send(msg)
 
 
@@ -72,7 +74,7 @@ def mail_verify(token):
     except Exception:
         return''''
         <div style='text-align:center'>
-        <h1>Request timed out</h1>
+        <h1>Invalid Token</h1>
         </div>'''
     username=data['username']
     cursor.execute('select verify from login where username=%s',[username])
@@ -110,22 +112,25 @@ def resend_mail(username):
 def signup():
     try:
         data = request.get_json()
+        token=tokenGen(data['username'])
+        # send_verification_email(data['email'],data['username'],token)
         byte = data['pass'].encode('utf8')
         salt = bcrypt.gensalt(12)
         hashpwd = bcrypt.hashpw(byte, salt)
-        token=tokenGen(data['username'])
         try:
             cursor.execute('insert into login (username,pass,mail,verify) values (%s,%s,%s,%s)', [
                            data['username'], hashpwd.decode('utf8'),data['email'],False])
             con.commit()
         except Exception as e:
             con.rollback()
-            return jsonify({"message": "User already exists"}), 409
+            return jsonify({"message": "User already exists"}), 226
+        thread=Thread(target=send_verification_email(data['email'],data['username'],token))
+        thread.start()
         con.commit()
-        send_verification_email(data['email'],data['username'],token)
-        return Response("Sucess", 200)
+        thread.join()
+        return jsonify({"message":"Sucess"}) ,200
     except Exception as e:
-        return Response("User already exist", 204)
+        return jsonify({"message":"User already exist"}), 226
 
 
 
